@@ -1,0 +1,21 @@
+{
+  "name": "agents",
+  "version": "1.0.0",
+  "description": "AI Agent simulation framework for contract validation research",
+  "main": "dist/engine.js",
+  "scripts": {
+    "build": "tsc",
+    "experiment": "tsx src/engine.ts",
+    "validate": "tsx src/validator.ts"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^17.4.2",
+    "openai": "^6.42.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

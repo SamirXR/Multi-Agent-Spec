@@ -1,0 +1,149 @@
+openapi: 3.0.3
+info:
+  title: Notification Service API
+  description: Manages notifications for the AI Software Factory
+  version: 1.0.0
+  contact:
+    name: AI Software Factory
+servers:
+  - url: http://localhost:3003
+    description: Local development server
+paths:
+  /notifications:
+    post:
+      operationId: createNotification
+      summary: Send a notification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNotificationRequest'
+            examples:
+              CREATE_NOTIFICATION:
+                value:
+                  userId: 1
+                  message: "Your task has been assigned"
+                  type: "info"
+      responses:
+        '201':
+          description: Notification created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Notification'
+              examples:
+                NOTIFICATION_CREATED:
+                  value:
+                    id: 1
+                    userId: 1
+                    message: "Your task has been assigned"
+                    type: "info"
+                    read: false
+                    createdAt: "2026-06-15T12:00:00Z"
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: listNotifications
+      summary: List all notifications
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: read
+          in: query
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of notifications
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Notification'
+              examples:
+                NOTIFICATIONS_LIST:
+                  value:
+                    - id: 1
+                      userId: 1
+                      message: "Your task has been assigned"
+                      type: "info"
+                      read: false
+                      createdAt: "2026-06-15T12:00:00Z"
+                    - id: 2
+                      userId: 1
+                      message: "Task completed successfully"
+                      type: "success"
+                      read: true
+                      createdAt: "2026-06-15T12:30:00Z"
+
+components:
+  schemas:
+    CreateNotificationRequest:
+      type: object
+      required:
+        - userId
+        - message
+        - type
+      properties:
+        userId:
+          type: integer
+          description: ID of the user to notify
+        message:
+          type: string
+          description: Notification message content
+        type:
+          type: string
+          enum:
+            - info
+            - success
+            - warning
+            - error
+          description: Severity type
+    Notification:
+      type: object
+      required:
+        - id
+        - userId
+        - message
+        - type
+        - read
+        - createdAt
+      properties:
+        id:
+          type: integer
+        userId:
+          type: integer
+        message:
+          type: string
+        type:
+          type: string
+          enum:
+            - info
+            - success
+            - warning
+            - error
+        read:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      required:
+        - error
+        - code
+      properties:
+        error:
+          type: string
+        code:
+          type: integer

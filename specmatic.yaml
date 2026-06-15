@@ -1,0 +1,17 @@
+version: 3
+contract:
+  sources:
+    - provider: local
+      specs:
+        - contracts/user-service.yaml
+        - contracts/task-service.yaml
+        - contracts/notification-service.yaml
+        - contracts/analytics-service.yaml
+
+environments:
+  local:
+    baseurls:
+      user-service: http://localhost:3001
+      task-service: http://localhost:3002
+      notification-service: http://localhost:3003
+      analytics-service: http://localhost:3004

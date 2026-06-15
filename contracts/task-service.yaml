@@ -1,0 +1,169 @@
+openapi: 3.0.3
+info:
+  title: Task Service API
+  description: Manages task creation and tracking for the AI Software Factory
+  version: 1.0.0
+  contact:
+    name: AI Software Factory
+servers:
+  - url: http://localhost:3002
+    description: Local development server
+paths:
+  /tasks:
+    post:
+      operationId: createTask
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTaskRequest'
+            examples:
+              CREATE_TASK:
+                value:
+                  title: "Implement login API"
+                  description: "Build the authentication endpoint with JWT"
+                  assigneeId: 1
+                  priority: "high"
+      responses:
+        '201':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+              examples:
+                TASK_CREATED:
+                  value:
+                    id: 1
+                    title: "Implement login API"
+                    description: "Build the authentication endpoint with JWT"
+                    assigneeId: 1
+                    status: "pending"
+                    priority: "high"
+                    createdAt: "2026-06-15T12:00:00Z"
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: listTasks
+      summary: List all tasks
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - pending
+              - in_progress
+              - completed
+              - cancelled
+        - name: assigneeId
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+              examples:
+                TASKS_LIST:
+                  value:
+                    - id: 1
+                      title: "Implement login API"
+                      description: "Build the authentication endpoint with JWT"
+                      assigneeId: 1
+                      status: "pending"
+                      priority: "high"
+                      createdAt: "2026-06-15T12:00:00Z"
+                    - id: 2
+                      title: "Design dashboard UI"
+                      description: "Create wireframes and implement the dashboard"
+                      assigneeId: 2
+                      status: "in_progress"
+                      priority: "medium"
+                      createdAt: "2026-06-15T12:10:00Z"
+
+components:
+  schemas:
+    CreateTaskRequest:
+      type: object
+      required:
+        - title
+        - description
+        - assigneeId
+      properties:
+        title:
+          type: string
+          description: Short title of the task
+        description:
+          type: string
+          description: Detailed description
+        assigneeId:
+          type: integer
+          description: ID of the user assigned to this task
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+          default: medium
+    Task:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - assigneeId
+        - status
+        - priority
+        - createdAt
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        assigneeId:
+          type: integer
+        status:
+          type: string
+          enum:
+            - pending
+            - in_progress
+            - completed
+            - cancelled
+        priority:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+            - critical
+        createdAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      required:
+        - error
+        - code
+      properties:
+        error:
+          type: string
+        code:
+          type: integer

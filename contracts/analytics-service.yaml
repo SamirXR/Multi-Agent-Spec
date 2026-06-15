@@ -1,0 +1,117 @@
+openapi: 3.0.3
+info:
+  title: Analytics Service API
+  description: Provides aggregated analytics and metrics for the AI Software Factory
+  version: 1.0.0
+  contact:
+    name: AI Software Factory
+servers:
+  - url: http://localhost:3004
+    description: Local development server
+paths:
+  /analytics:
+    get:
+      operationId: getAnalytics
+      summary: Get aggregated analytics
+      parameters:
+        - name: from
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: Start date for analytics range
+        - name: to
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date-time
+          description: End date for analytics range
+      responses:
+        '200':
+          description: Analytics data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Analytics'
+              examples:
+                ANALYTICS_DATA:
+                  value:
+                    totalUsers: 42
+                    totalTasks: 128
+                    completedTasks: 87
+                    completionRate: 67.97
+                    activeNotifications: 15
+                    tasksByPriority:
+                      low: 20
+                      medium: 55
+                      high: 38
+                      critical: 15
+                    tasksByStatus:
+                      pending: 18
+                      in_progress: 23
+                      completed: 87
+                      cancelled: 0
+                    generatedAt: "2026-06-15T12:00:00Z"
+
+components:
+  schemas:
+    Analytics:
+      type: object
+      required:
+        - totalUsers
+        - totalTasks
+        - completedTasks
+        - completionRate
+        - activeNotifications
+        - tasksByPriority
+        - tasksByStatus
+        - generatedAt
+      properties:
+        totalUsers:
+          type: integer
+        totalTasks:
+          type: integer
+        completedTasks:
+          type: integer
+        completionRate:
+          type: number
+          format: float
+        activeNotifications:
+          type: integer
+        tasksByPriority:
+          type: object
+          required:
+            - low
+            - medium
+            - high
+            - critical
+          properties:
+            low:
+              type: integer
+            medium:
+              type: integer
+            high:
+              type: integer
+            critical:
+              type: integer
+        tasksByStatus:
+          type: object
+          required:
+            - pending
+            - in_progress
+            - completed
+            - cancelled
+          properties:
+            pending:
+              type: integer
+            in_progress:
+              type: integer
+            completed:
+              type: integer
+            cancelled:
+              type: integer
+        generatedAt:
+          type: string
+          format: date-time

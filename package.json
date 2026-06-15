@@ -1,0 +1,32 @@
+{
+  "name": "specmatic-ai-factory",
+  "version": "1.0.0",
+  "description": "Multi-Agent AI Software Factory with Specmatic — Research-oriented project demonstrating executable API contracts for AI-assisted development",
+  "private": true,
+  "workspaces": [
+    "services/user-service",
+    "services/task-service",
+    "services/notification-service",
+    "services/analytics-service",
+    "agents",
+    "dashboard"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "start:user-service": "npm run start -w services/user-service",
+    "start:task-service": "npm run start -w services/task-service",
+    "start:notification-service": "npm run start -w services/notification-service",
+    "start:analytics-service": "npm run start -w services/analytics-service",
+    "start:services": "concurrently \"npm run start:user-service\" \"npm run start:task-service\" \"npm run start:notification-service\" \"npm run start:analytics-service\"",
+    "start:dashboard": "npm run dev -w dashboard",
+    "experiment": "npm run experiment -w agents",
+    "contract:test:users": "npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:3001",
+    "contract:test:tasks": "npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:3002",
+    "contract:test:notifications": "npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:3003",
+    "contract:test:analytics": "npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:3004",
+    "contract:test:all": "concurrently \"npm run contract:test:users\" \"npm run contract:test:tasks\" \"npm run contract:test:notifications\" \"npm run contract:test:analytics\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}

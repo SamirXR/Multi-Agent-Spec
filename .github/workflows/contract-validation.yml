@@ -1,0 +1,145 @@
+name: Contract Validation Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-contracts:
+    name: Validate API Contracts
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Validate OpenAPI contracts (lint)
+        run: |
+          npx @redocly/cli lint contracts/user-service.yaml --skip-rule=no-unused-components
+          npx @redocly/cli lint contracts/task-service.yaml --skip-rule=no-unused-components
+          npx @redocly/cli lint contracts/notification-service.yaml --skip-rule=no-unused-components
+          npx @redocly/cli lint contracts/analytics-service.yaml --skip-rule=no-unused-components
+
+      - name: Build dashboard
+        run: npm run build -w dashboard
+
+  contract-tests:
+    name: Run Specmatic Contract Tests
+    runs-on: ubuntu-latest
+    needs: validate-contracts
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Setup Java (required for Specmatic)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Start User Service
+        run: |
+          npm run start:user-service &
+          sleep 3
+
+      - name: Start Task Service
+        run: |
+          npm run start:task-service &
+          sleep 3
+
+      - name: Start Notification Service
+        run: |
+          npm run start:notification-service &
+          sleep 3
+
+      - name: Start Analytics Service
+        run: |
+          npm run start:analytics-service &
+          sleep 3
+
+      - name: Run Specmatic contract tests — User Service
+        run: npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:3001
+
+      - name: Run Specmatic contract tests — Task Service
+        run: npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:3002
+
+      - name: Run Specmatic contract tests — Notification Service
+        run: npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:3003
+
+      - name: Run Specmatic contract tests — Analytics Service
+        run: npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:3004
+
+      - name: Run agent experiment
+        run: npm run experiment -w agents
+
+      - name: Upload experiment results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: experiment-results
+          path: dashboard/public/experiment-results.json
+
+      - name: Upload Specmatic reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: specmatic-reports
+          path: build/reports/specmatic/
+
+  report:
+    name: Generate Validation Report
+    runs-on: ubuntu-latest
+    needs: contract-tests
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download experiment results
+        uses: actions/download-artifact@v4
+        with:
+          name: experiment-results
+          path: ./results
+
+      - name: Generate summary
+        run: |
+          echo "## 📊 Contract Validation Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f ./results/experiment-results.json ]; then
+            TOTAL=$(jq '.totalAPIs' ./results/experiment-results.json)
+            SUCCESS=$(jq '.successfulIntegrations' ./results/experiment-results.json)
+            FAILED=$(jq '.failedIntegrations' ./results/experiment-results.json)
+            VIOLATIONS=$(jq '.violationsDetected' ./results/experiment-results.json)
+            COMPLIANCE=$(jq '.metrics.contractComplianceRate' ./results/experiment-results.json)
+            echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+            echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+            echo "| Total APIs | $TOTAL |" >> $GITHUB_STEP_SUMMARY
+            echo "| Successful | $SUCCESS |" >> $GITHUB_STEP_SUMMARY
+            echo "| Failed | $FAILED |" >> $GITHUB_STEP_SUMMARY
+            echo "| Violations | $VIOLATIONS |" >> $GITHUB_STEP_SUMMARY
+            echo "| Compliance | ${COMPLIANCE}% |" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "❌ No experiment results found" >> $GITHUB_STEP_SUMMARY
+          fi

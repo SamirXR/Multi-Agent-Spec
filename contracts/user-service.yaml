@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: User Service API
+  description: Manages user registration and retrieval for the AI Software Factory
+  version: 1.0.0
+  contact:
+    name: AI Software Factory
+servers:
+  - url: http://localhost:3001
+    description: Local development server
+paths:
+  /users:
+    post:
+      operationId: createUser
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+            examples:
+              CREATE_USER:
+                value:
+                  name: "Samir"
+                  email: "samir@example.com"
+                  phone: "9876543210"
+                  role: "developer"
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                USER_CREATED:
+                  value:
+                    id: 1
+                    name: "Samir"
+                    email: "samir@example.com"
+                    phone: "9876543210"
+                    role: "developer"
+                    createdAt: "2026-06-15T12:00:00Z"
+        '400':
+          description: Invalid request body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      operationId: listUsers
+      summary: List all users
+      parameters:
+        - name: role
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - developer
+              - designer
+              - manager
+              - tester
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              examples:
+                USERS_LIST:
+                  value:
+                    - id: 1
+                      name: "Samir"
+                      email: "samir@example.com"
+                      phone: "9876543210"
+                      role: "developer"
+                      createdAt: "2026-06-15T12:00:00Z"
+                    - id: 2
+                      name: "Aria"
+                      email: "aria@example.com"
+                      phone: "9876543211"
+                      role: "designer"
+                      createdAt: "2026-06-15T12:05:00Z"
+  /users/{id}:
+    get:
+      operationId: getUserById
+      summary: Get a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          examples:
+            FETCH_USER:
+              value: 1
+      responses:
+        '200':
+          description: User details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+              examples:
+                USER_DETAIL:
+                  value:
+                    id: 1
+                    name: "Samir"
+                    email: "samir@example.com"
+                    phone: "9876543210"
+                    role: "developer"
+                    createdAt: "2026-06-15T12:00:00Z"
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                NOT_FOUND:
+                  value:
+                    error: "User not found"
+                    code: 404
+
+components:
+  schemas:
+    CreateUserRequest:
+      type: object
+      required:
+        - name
+        - email
+        - phone
+      properties:
+        name:
+          type: string
+          description: Full name of the user
+        email:
+          type: string
+          format: email
+          description: Email address
+        phone:
+          type: string
+          description: Phone number (must be a string)
+        role:
+          type: string
+          enum:
+            - developer
+            - designer
+            - manager
+            - tester
+          default: developer
+    User:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - phone
+        - role
+        - createdAt
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        role:
+          type: string
+          enum:
+            - developer
+            - designer
+            - manager
+            - tester
+        createdAt:
+          type: string
+          format: date-time
+    Error:
+      type: object
+      required:
+        - error
+        - code
+      properties:
+        error:
+          type: string
+        code:
+          type: integer
