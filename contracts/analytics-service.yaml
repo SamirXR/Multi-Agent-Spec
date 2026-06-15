@@ -60,6 +60,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_DATE:
+                  value:
+                    error: "Query parameter \"from\" must be a valid date-time string"
+                    code: 400
 
 components:
   schemas:

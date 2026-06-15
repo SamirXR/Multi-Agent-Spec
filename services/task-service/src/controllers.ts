@@ -8,8 +8,8 @@ const ALLOWED_CREATE_FIELDS = ['title', 'description', 'assigneeId', 'priority']
 export function createTask(req: Request, res: Response): void {
   const body = req.body;
 
-  // Validate request body exists and is an object
-  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+  // Validate request body exists and is an object (not null, not array, not primitive)
+  if (body === null || body === undefined || typeof body !== 'object' || Array.isArray(body)) {
     res.status(400).json({ error: 'Request body must be a JSON object', code: 400 });
     return;
   }
@@ -23,35 +23,37 @@ export function createTask(req: Request, res: Response): void {
 
   const { title, description, assigneeId, priority } = body;
 
-  // Validate required fields are present
-  if (title === undefined || description === undefined || assigneeId === undefined) {
-    const missing: string[] = [];
-    if (title === undefined) missing.push('title');
-    if (description === undefined) missing.push('description');
-    if (assigneeId === undefined) missing.push('assigneeId');
+  // Validate required fields are present and not null
+  const missing: string[] = [];
+  if (title === undefined || title === null) missing.push('title');
+  if (description === undefined || description === null) missing.push('description');
+  if (assigneeId === undefined || assigneeId === null) missing.push('assigneeId');
+  if (missing.length > 0) {
     res.status(400).json({ error: `Missing required fields: ${missing.join(', ')}`, code: 400 });
     return;
   }
 
-  // Validate types
+  // Validate types - title must be string
   if (typeof title !== 'string') {
     res.status(400).json({ error: 'Field "title" must be a string', code: 400 });
     return;
   }
 
+  // Validate types - description must be string
   if (typeof description !== 'string') {
     res.status(400).json({ error: 'Field "description" must be a string', code: 400 });
     return;
   }
 
+  // Validate types - assigneeId must be integer
   if (typeof assigneeId !== 'number' || !Number.isInteger(assigneeId)) {
     res.status(400).json({ error: 'Field "assigneeId" must be an integer', code: 400 });
     return;
   }
 
-  // Validate priority if provided
+  // Validate priority if provided (null is not valid for optional fields either)
   const effectivePriority = priority !== undefined ? priority : 'medium';
-  if (typeof effectivePriority !== 'string') {
+  if (priority !== undefined && (typeof effectivePriority !== 'string' || effectivePriority === null)) {
     res.status(400).json({ error: 'Field "priority" must be a string', code: 400 });
     return;
   }

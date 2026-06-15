@@ -1,10 +1,15 @@
 version: 3
 
+# Test the Task Service as the System Under Test (SUT).
+# To test other services, change the $ref pointers below.
+# For example, to test the user-service instead, change:
+#   systemUnderTest.service.$ref -> "#/components/services/userService"
+#   systemUnderTest.service.runOptions.$ref -> "#/components/runOptions/userServiceTest"
 systemUnderTest:
   service:
-    $ref: "#/components/services/analyticsService"
+    $ref: "#/components/services/taskService"
     runOptions:
-      $ref: "#/components/runOptions/analyticsServiceTest"
+      $ref: "#/components/runOptions/taskServiceTest"
 
 dependencies:
   services:
@@ -12,10 +17,6 @@ dependencies:
         $ref: "#/components/services/userService"
         runOptions:
           $ref: "#/components/runOptions/userServiceMock"
-    - service:
-        $ref: "#/components/services/taskService"
-        runOptions:
-          $ref: "#/components/runOptions/taskServiceMock"
     - service:
         $ref: "#/components/services/notificationService"
         runOptions:
@@ -29,6 +30,7 @@ components:
 
   services:
     userService:
+      description: User Service
       definitions:
         - definition:
             source:
@@ -36,13 +38,17 @@ components:
             specs:
               - user-service.yaml
     taskService:
+      description: Task Service
       definitions:
         - definition:
             source:
               $ref: "#/components/sources/localContracts"
             specs:
               - task-service.yaml
+      settings:
+        resiliencyTests: all
     notificationService:
+      description: Notification Service
       definitions:
         - definition:
             source:
@@ -50,6 +56,7 @@ components:
             specs:
               - notification-service.yaml
     analyticsService:
+      description: Analytics Service
       definitions:
         - definition:
             source:
@@ -61,32 +68,37 @@ components:
     userServiceTest:
       openapi:
         type: test
-        baseUrl: "http://localhost:3001"
+        host: localhost
+        port: 3001
     userServiceMock:
       openapi:
         type: mock
-        baseUrl: "http://localhost:3001"
+        host: localhost
+        port: 9001
     taskServiceTest:
       openapi:
         type: test
-        baseUrl: "http://localhost:3002"
-    taskServiceMock:
-      openapi:
-        type: mock
-        baseUrl: "http://localhost:3002"
+        host: localhost
+        port: 3002
     notificationServiceTest:
       openapi:
         type: test
-        baseUrl: "http://localhost:3003"
+        host: localhost
+        port: 3003
     notificationServiceMock:
       openapi:
         type: mock
-        baseUrl: "http://localhost:3003"
+        host: localhost
+        port: 9003
     analyticsServiceTest:
       openapi:
         type: test
-        baseUrl: "http://localhost:3004"
+        host: localhost
+        port: 3004
 
 specmatic:
-  license:
-    path: "{SPECMATIC_LICENSE_PATH:./license.txt}"
+  governance:
+    successCriteria:
+      minCoveragePercentage: 0
+      maxMissedOperationsInSpec: 0
+      enforce: true

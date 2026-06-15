@@ -34,7 +34,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Task'
               examples:
-                TASK_CREATED:
+                CREATE_TASK:
                   value:
                     id: 1
                     title: "Implement login API"
@@ -49,6 +49,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                MISSING_FIELDS:
+                  value:
+                    error: "Missing required fields: title, description"
+                    code: 400
+                INVALID_TYPE:
+                  value:
+                    error: "Field \"title\" must be a string"
+                    code: 400
     get:
       operationId: listTasks
       summary: List all tasks
@@ -100,6 +109,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_STATUS:
+                  value:
+                    error: "Invalid status. Must be one of: pending, in_progress, completed, cancelled"
+                    code: 400
 
 components:
   schemas:

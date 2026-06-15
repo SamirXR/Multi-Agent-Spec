@@ -8,7 +8,7 @@ export function createNotification(req: Request, res: Response): void {
   const body = req.body;
 
   // Validate request body exists and is an object
-  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+  if (body === null || body === undefined || typeof body !== 'object' || Array.isArray(body)) {
     res.status(400).json({ error: 'Request body must be a JSON object', code: 400 });
     return;
   }
@@ -22,12 +22,12 @@ export function createNotification(req: Request, res: Response): void {
 
   const { userId, message, type } = body;
 
-  // Validate required fields are present
-  if (userId === undefined || message === undefined || type === undefined) {
-    const missing: string[] = [];
-    if (userId === undefined) missing.push('userId');
-    if (message === undefined) missing.push('message');
-    if (type === undefined) missing.push('type');
+  // Validate required fields are present and not null
+  const missing: string[] = [];
+  if (userId === undefined || userId === null) missing.push('userId');
+  if (message === undefined || message === null) missing.push('message');
+  if (type === undefined || type === null) missing.push('type');
+  if (missing.length > 0) {
     res.status(400).json({ error: `Missing required fields: ${missing.join(', ')}`, code: 400 });
     return;
   }

@@ -24,13 +24,10 @@
     "contract:test:tasks": "npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:3002",
     "contract:test:notifications": "npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:3003",
     "contract:test:analytics": "npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:3004",
-    "contract:test:all": "concurrently \"npm run contract:test:users\" \"npm run contract:test:tasks\" \"npm run contract:test:notifications\" \"npm run contract:test:analytics\""
+    "contract:test:all": "npm run contract:test:users && npm run contract:test:tasks && npm run contract:test:notifications && npm run contract:test:analytics"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",
     "specmatic": "^2.47.0"
-  },
-  "dependencies": {
-    "specmatic-mcp": "^1.2.0"
   }
 }

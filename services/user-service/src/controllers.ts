@@ -8,7 +8,7 @@ export function createUser(req: Request, res: Response): void {
   const body = req.body;
 
   // Validate request body exists and is an object
-  if (!body || typeof body !== 'object' || Array.isArray(body)) {
+  if (body === null || body === undefined || typeof body !== 'object' || Array.isArray(body)) {
     res.status(400).json({ error: 'Request body must be a JSON object', code: 400 });
     return;
   }
@@ -22,12 +22,12 @@ export function createUser(req: Request, res: Response): void {
 
   const { name, email, phone, role } = body;
 
-  // Validate required fields are present
-  if (name === undefined || email === undefined || phone === undefined) {
-    const missing: string[] = [];
-    if (name === undefined) missing.push('name');
-    if (email === undefined) missing.push('email');
-    if (phone === undefined) missing.push('phone');
+  // Validate required fields are present and not null
+  const missing: string[] = [];
+  if (name === undefined || name === null) missing.push('name');
+  if (email === undefined || email === null) missing.push('email');
+  if (phone === undefined || phone === null) missing.push('phone');
+  if (missing.length > 0) {
     res.status(400).json({ error: `Missing required fields: ${missing.join(', ')}`, code: 400 });
     return;
   }
@@ -57,7 +57,7 @@ export function createUser(req: Request, res: Response): void {
 
   // Validate role if provided
   const effectiveRole = role !== undefined ? role : 'developer';
-  if (typeof effectiveRole !== 'string') {
+  if (role !== undefined && (typeof effectiveRole !== 'string' || effectiveRole === null)) {
     res.status(400).json({ error: 'Field "role" must be a string', code: 400 });
     return;
   }

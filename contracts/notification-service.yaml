@@ -33,7 +33,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Notification'
               examples:
-                NOTIFICATION_CREATED:
+                CREATE_NOTIFICATION:
                   value:
                     id: 1
                     userId: 1
@@ -47,6 +47,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                MISSING_FIELDS:
+                  value:
+                    error: "Missing required fields: userId, message"
+                    code: 400
+                INVALID_TYPE:
+                  value:
+                    error: "Field \"userId\" must be an integer"
+                    code: 400
     get:
       operationId: listNotifications
       summary: List all notifications
@@ -91,6 +100,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_USERID:
+                  value:
+                    error: "Query parameter \"userId\" must be an integer"
+                    code: 400
 
 components:
   schemas:

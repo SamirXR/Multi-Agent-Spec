@@ -34,7 +34,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/User'
               examples:
-                USER_CREATED:
+                CREATE_USER:
                   value:
                     id: 1
                     name: "Samir"
@@ -48,6 +48,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                MISSING_FIELDS:
+                  value:
+                    error: "Missing required fields: name, email"
+                    code: 400
+                INVALID_EMAIL:
+                  value:
+                    error: "Field \"email\" must be a valid email address"
+                    code: 400
     get:
       operationId: listUsers
       summary: List all users
@@ -92,6 +101,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_ROLE:
+                  value:
+                    error: "Invalid role. Must be one of: developer, designer, manager, tester"
+                    code: 400
   /users/{id}:
     get:
       operationId: getUserById
@@ -140,6 +154,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_ID:
+                  value:
+                    error: "Invalid user ID: must be an integer"
+                    code: 400
 
 components:
   schemas:
