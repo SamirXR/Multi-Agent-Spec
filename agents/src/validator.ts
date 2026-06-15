@@ -2,9 +2,12 @@
  * Contract Validator
  * 
  * Validates agent-generated payloads against OpenAPI contracts.
- * In production, this wraps Specmatic CLI calls.
- * For the simulation, it performs structural validation against
- * the contract schemas.
+ * 
+ * This validator parses the actual OpenAPI YAML contract files from
+ * the /contracts/ directory and validates payloads structurally.
+ * 
+ * For full contract testing (including HTTP behavior, status codes,
+ * resiliency), use Specmatic CLI — see engine.ts Phase 4.
  */
 
 import { AgentArtifact, Violation, ViolationType } from './types';
@@ -25,71 +28,134 @@ interface ContractSchema {
 }
 
 /**
- * Load and parse a simplified schema from the OpenAPI contract YAML.
- * In production, Specmatic does this automatically.
- * Here we parse just enough to validate payloads.
+ * Parse a simplified schema from the actual OpenAPI YAML contract files.
+ * Uses basic YAML parsing without external dependencies.
  */
 function loadContractSchemas(): Record<string, Record<string, ContractSchema>> {
-  return {
-    'user-service': {
-      'CreateUserRequest': {
-        required: ['name', 'email', 'phone'],
-        properties: {
-          name: { type: 'string' },
-          email: { type: 'string', format: 'email' },
-          phone: { type: 'string' },
-          role: { type: 'string', enum: ['developer', 'designer', 'manager', 'tester'] },
-        },
-      },
-      'User': {
-        required: ['id', 'name', 'email', 'phone', 'role', 'createdAt'],
-        properties: {
-          id: { type: 'integer' },
-          name: { type: 'string' },
-          email: { type: 'string', format: 'email' },
-          phone: { type: 'string' },
-          role: { type: 'string' },
-          createdAt: { type: 'string', format: 'date-time' },
-        },
-      },
-    },
-    'task-service': {
-      'CreateTaskRequest': {
-        required: ['title', 'description', 'assigneeId'],
-        properties: {
-          title: { type: 'string' },
-          description: { type: 'string' },
-          assigneeId: { type: 'integer' },
-          priority: { type: 'string', enum: ['low', 'medium', 'high', 'critical'] },
-        },
-      },
-      'Task': {
-        required: ['id', 'title', 'description', 'assigneeId', 'status', 'priority', 'createdAt'],
-        properties: {
-          id: { type: 'integer' },
-          title: { type: 'string' },
-          description: { type: 'string' },
-          assigneeId: { type: 'integer' },
-          status: { type: 'string' },
-          priority: { type: 'string' },
-          createdAt: { type: 'string' },
-        },
-      },
-    },
-    'notification-service': {
-      'Notification': {
-        required: ['id', 'userId', 'message', 'type', 'read', 'createdAt'],
-        properties: {
-          id: { type: 'integer' },
-          userId: { type: 'integer' },
-          message: { type: 'string' },
-          type: { type: 'string' },
-          read: { type: 'boolean' },
-          createdAt: { type: 'string' },
-        },
-      },
-    },
-  };
+  const schemas: Record<string, Record<string, ContractSchema>> = {};
+
+  const contractFiles = [
+    { file: 'user-service.yaml', service: 'user-service' },
+    { file: 'task-service.yaml', service: 'task-service' },
+    { file: 'notification-service.yaml', service: 'notification-service' },
+  ];
+
+  for (const { file, service } of contractFiles) {
+    const filePath = path.join(CONTRACTS_DIR, file);
+    if (!fs.existsSync(filePath)) {
+      console.warn(`Contract file not found: ${filePath}`);
+      continue;
+    }
+
+    const content = fs.readFileSync(filePath, 'utf-8');
+    schemas[service] = parseOpenAPISchemas(content);
+  }
+
+  return schemas;
+}
+
+/**
+ * Basic YAML/OpenAPI schema parser.
+ * Extracts component schemas from OpenAPI YAML files.
+ * This is intentionally minimal — for full validation, use Specmatic.
+ */
+function parseOpenAPISchemas(yamlContent: string): Record<string, ContractSchema> {
+  const schemas: Record<string, ContractSchema> = {};
+  const lines = yamlContent.split('\n');
+
+  let inSchemas = false;
+  let currentSchemaName = '';
+  let inProperties = false;
+  let inRequired = false;
+  let currentProperty = '';
+  let currentSchema: ContractSchema = { required: [], properties: {} };
+
+  for (const line of lines) {
+    const trimmed = line.trimEnd();
+    const indent = line.length - line.trimStart().length;
+
+    // Detect components > schemas section
+    if (trimmed.trim() === 'schemas:' && indent === 2) {
+      inSchemas = true;
+      continue;
+    }
+
+    if (!inSchemas) continue;
+
+    // Detect schema name (indent 4, ends with :)
+    if (indent === 4 && trimmed.trim().endsWith(':') && !trimmed.trim().startsWith('-')) {
+      // Save previous schema
+      if (currentSchemaName) {
+        schemas[currentSchemaName] = { ...currentSchema };
+      }
+      currentSchemaName = trimmed.trim().replace(':', '');
+      currentSchema = { required: [], properties: {} };
+      inProperties = false;
+      inRequired = false;
+      continue;
+    }
+
+    // Detect required section
+    if (indent === 6 && trimmed.trim() === 'required:') {
+      inRequired = true;
+      inProperties = false;
+      continue;
+    }
+
+    // Detect properties section
+    if (indent === 6 && trimmed.trim() === 'properties:') {
+      inProperties = true;
+      inRequired = false;
+      continue;
+    }
+
+    // Other top-level schema fields (type, etc.) end required/properties
+    if (indent === 6 && !trimmed.trim().startsWith('-')) {
+      if (trimmed.trim() !== 'required:' && trimmed.trim() !== 'properties:') {
+        inRequired = false;
+        inProperties = false;
+      }
+    }
+
+    // Parse required items
+    if (inRequired && indent === 8 && trimmed.trim().startsWith('-')) {
+      const fieldName = trimmed.trim().replace(/^-\s*/, '').trim();
+      currentSchema.required.push(fieldName);
+      continue;
+    }
+
+    // Parse property names (indent 8)
+    if (inProperties && indent === 8 && trimmed.trim().endsWith(':') && !trimmed.trim().startsWith('-')) {
+      currentProperty = trimmed.trim().replace(':', '');
+      currentSchema.properties[currentProperty] = { type: 'string' }; // default
+      continue;
+    }
+
+    // Parse property attributes (indent 10+)
+    if (inProperties && currentProperty && indent >= 10) {
+      const match = trimmed.trim().match(/^(\w+):\s*(.+)$/);
+      if (match) {
+        const [, key, value] = match;
+        if (key === 'type') {
+          currentSchema.properties[currentProperty].type = value.trim();
+        } else if (key === 'format') {
+          currentSchema.properties[currentProperty].format = value.trim();
+        }
+      }
+    }
+
+    // Exit schemas section if we hit a lower indent non-schema line
+    if (indent <= 2 && trimmed.trim().length > 0 && !trimmed.trim().startsWith('#')) {
+      break;
+    }
+  }
+
+  // Save last schema
+  if (currentSchemaName) {
+    schemas[currentSchemaName] = { ...currentSchema };
+  }
+
+  return schemas;
 }
 
 function getJSType(value: any): string {
@@ -114,6 +180,10 @@ function matchesContractType(value: any, expectedType: string): boolean {
 /**
  * Validate a payload against a known contract schema.
  * Returns a list of violations found.
+ * 
+ * NOTE: This is a structural validator only. It checks field presence,
+ * types, and unexpected fields. For full contract testing (HTTP behavior,
+ * status codes, resiliency), use Specmatic CLI.
  */
 export function validatePayload(
   payload: Record<string, any>,
@@ -147,7 +217,7 @@ export function validatePayload(
         agentId: agentId as any,
         service,
         endpoint,
-        detectedBy: 'specmatic',
+        detectedBy: 'manual',
         preventedDeployment: true,
       });
     }
@@ -169,7 +239,7 @@ export function validatePayload(
         agentId: agentId as any,
         service,
         endpoint,
-        detectedBy: 'specmatic',
+        detectedBy: 'manual',
         preventedDeployment: true,
       });
     } else if (!matchesContractType(value, prop.type)) {
@@ -185,7 +255,7 @@ export function validatePayload(
         agentId: agentId as any,
         service,
         endpoint,
-        detectedBy: 'specmatic',
+        detectedBy: 'manual',
         preventedDeployment: true,
       });
     }

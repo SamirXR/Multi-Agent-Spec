@@ -30,3 +30,6 @@ dashboard/public/experiment-results.json
 
 # Specmatic reports
 build/reports/
+
+# License files
+license.txt

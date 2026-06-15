@@ -94,6 +94,12 @@ paths:
                       status: "in_progress"
                       priority: "medium"
                       createdAt: "2026-06-15T12:10:00Z"
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   schemas:

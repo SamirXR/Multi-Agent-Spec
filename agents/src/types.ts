@@ -69,6 +69,19 @@ export interface ExperimentResult {
   scenarios: ScenarioResult[];
   artifacts: AgentArtifact[];
   metrics: ResearchMetrics;
+  specmaticResults?: SpecmaticTestResult[];
+}
+
+export interface SpecmaticTestResult {
+  service: string;
+  contractFile: string;
+  baseUrl: string;
+  totalTests: number;
+  passed: number;
+  failed: number;
+  success: boolean;
+  output: string;
+  errorOutput?: string;
 }
 
 export interface ResearchMetrics {

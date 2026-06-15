@@ -1,9 +1,11 @@
 /**
- * Intentional Failure Scenarios
+ * Illustrative Failure Scenarios
  * 
- * Six predefined scenarios that demonstrate contract violations
- * commonly produced by independent AI agents. Each scenario
- * shows what happens without vs. with Specmatic contract validation.
+ * Six predefined examples that demonstrate the TYPES of contract
+ * violations commonly produced by independent AI agents. These are
+ * illustrative — they show what Specmatic would catch, not actual
+ * test results. Real Specmatic test results are generated in Phase 4
+ * of the experiment engine.
  */
 
 import { ScenarioResult, Violation } from '../types';

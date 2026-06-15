@@ -27,6 +27,10 @@
     "contract:test:all": "concurrently \"npm run contract:test:users\" \"npm run contract:test:tasks\" \"npm run contract:test:notifications\" \"npm run contract:test:analytics\""
   },
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.1.0",
+    "specmatic": "^2.47.0"
+  },
+  "dependencies": {
+    "specmatic-mcp": "^1.2.0"
   }
 }

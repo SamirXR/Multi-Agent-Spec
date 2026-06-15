@@ -1,17 +1,92 @@
 version: 3
-contract:
-  sources:
-    - provider: local
-      specs:
-        - contracts/user-service.yaml
-        - contracts/task-service.yaml
-        - contracts/notification-service.yaml
-        - contracts/analytics-service.yaml
 
-environments:
-  local:
-    baseurls:
-      user-service: http://localhost:3001
-      task-service: http://localhost:3002
-      notification-service: http://localhost:3003
-      analytics-service: http://localhost:3004
+systemUnderTest:
+  service:
+    $ref: "#/components/services/analyticsService"
+    runOptions:
+      $ref: "#/components/runOptions/analyticsServiceTest"
+
+dependencies:
+  services:
+    - service:
+        $ref: "#/components/services/userService"
+        runOptions:
+          $ref: "#/components/runOptions/userServiceMock"
+    - service:
+        $ref: "#/components/services/taskService"
+        runOptions:
+          $ref: "#/components/runOptions/taskServiceMock"
+    - service:
+        $ref: "#/components/services/notificationService"
+        runOptions:
+          $ref: "#/components/runOptions/notificationServiceMock"
+
+components:
+  sources:
+    localContracts:
+      filesystem:
+        directory: contracts
+
+  services:
+    userService:
+      definitions:
+        - definition:
+            source:
+              $ref: "#/components/sources/localContracts"
+            specs:
+              - user-service.yaml
+    taskService:
+      definitions:
+        - definition:
+            source:
+              $ref: "#/components/sources/localContracts"
+            specs:
+              - task-service.yaml
+    notificationService:
+      definitions:
+        - definition:
+            source:
+              $ref: "#/components/sources/localContracts"
+            specs:
+              - notification-service.yaml
+    analyticsService:
+      definitions:
+        - definition:
+            source:
+              $ref: "#/components/sources/localContracts"
+            specs:
+              - analytics-service.yaml
+
+  runOptions:
+    userServiceTest:
+      openapi:
+        type: test
+        baseUrl: "http://localhost:3001"
+    userServiceMock:
+      openapi:
+        type: mock
+        baseUrl: "http://localhost:3001"
+    taskServiceTest:
+      openapi:
+        type: test
+        baseUrl: "http://localhost:3002"
+    taskServiceMock:
+      openapi:
+        type: mock
+        baseUrl: "http://localhost:3002"
+    notificationServiceTest:
+      openapi:
+        type: test
+        baseUrl: "http://localhost:3003"
+    notificationServiceMock:
+      openapi:
+        type: mock
+        baseUrl: "http://localhost:3003"
+    analyticsServiceTest:
+      openapi:
+        type: test
+        baseUrl: "http://localhost:3004"
+
+specmatic:
+  license:
+    path: "{SPECMATIC_LICENSE_PATH:./license.txt}"

@@ -85,6 +85,12 @@ paths:
                       type: "success"
                       read: true
                       createdAt: "2026-06-15T12:30:00Z"
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   schemas:

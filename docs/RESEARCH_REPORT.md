@@ -54,13 +54,15 @@ We simulate a software development team of **5 independent AI agents**, each res
 
 ### Experiment Protocol
 
-1. **Phase 1 — Compliant Generation**: All agents run in "compliant mode," producing outputs that perfectly match the OpenAPI contracts.
+1. **Phase 1 — Compliant Generation**: All agents run in "compliant mode," receiving prompts that include the expected payload structure. The LLM generates outputs matching the contracts.
 
-2. **Phase 2 — Drift Generation**: All agents run in "drift mode," simulating AI hallucinations. Each agent introduces specific, intentional violations.
+2. **Phase 2 — Drift Generation**: All agents run in "drift mode," with prompts explicitly instructing the LLM to introduce hallucinations (wrong types, missing fields, extra fields).
 
-3. **Phase 3 — Contract Validation**: All drifted artifacts are validated against the canonical contracts using Specmatic's validation logic.
+3. **Phase 3 — Structural Validation**: All drifted artifacts are validated against the canonical contracts using a built-in structural validator that parses the actual OpenAPI YAML files.
 
-4. **Phase 4 — Metric Computation**: Research metrics are calculated comparing the two scenarios.
+4. **Phase 4 — Specmatic Contract Tests**: Real Specmatic CLI contract tests are run against the live services, including resiliency tests.
+
+5. **Phase 5 — Metric Computation**: Research metrics are calculated combining both structural validation and Specmatic test results.
 
 ### Controlled Failure Scenarios
 
@@ -128,9 +130,9 @@ Specmatic is uniquely suited for this use case because it:
 
 ### Limitations
 
-1. **Deterministic Agents**: This experiment uses deterministic simulation agents rather than live LLM calls. While this ensures reproducible results, real LLM agents may produce more varied and unpredictable violations.
+1. **LLM Variability**: Agents use LLM calls via Nvidia NIM (Meta Llama models). Results vary between runs due to model temperature and non-deterministic generation.
 
-2. **Structural Validation Only**: This experiment focuses on structural contract violations (field names, types, required fields). Semantic violations (correct field name but wrong data meaning) are not tested.
+2. **Structural Validation Only for Agent Artifacts**: The built-in structural validator checks field names, types, and required fields. Full HTTP behavior testing (status codes, resiliency, edge cases) is handled by Specmatic CLI.
 
 3. **Single API Style**: All services use REST/JSON. Results may differ for GraphQL, gRPC, or event-driven architectures.
 

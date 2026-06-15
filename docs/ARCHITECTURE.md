@@ -67,7 +67,7 @@ The AI Software Factory is a research platform consisting of four layers:
 │  │  :3001     │ │  :3002     │ │  :3003     │ │  :3004     │   │
 │  │            │ │            │ │            │ │            │   │
 │  │ Express+TS │ │ Express+TS │ │ Express+TS │ │ Express+TS │   │
-│  │ SQLite     │ │ SQLite     │ │ SQLite     │ │ HTTP agg.  │   │
+│  │ In-memory  │ │ In-memory  │ │ In-memory  │ │ HTTP agg.  │   │
 │  └────────────┘ └────────────┘ └────────────┘ └────────────┘   │
 └──────────────────────────────────────────────────────────────────┘
 ```
@@ -123,8 +123,8 @@ The AI Software Factory is a research platform consisting of four layers:
 
 | Decision | Rationale |
 |----------|-----------|
-| **Deterministic agents** (not LLM) | Reproducible experiments with controlled failure scenarios |
-| **SQLite** (not PostgreSQL) | Zero-config, fully self-contained, no external dependencies |
+| **LLM-based agents** (Nvidia NIM) | Real AI-generated artifacts with genuine hallucination behavior |
+| **In-memory arrays** (not databases) | Zero-config, fully self-contained, no external dependencies |
 | **npm workspaces** | Single `npm install` for all packages, simplified development |
 | **Recharts** (not D3) | React-native charting, simpler API for dashboard visualizations |
 | **Static JSON results** | Dashboard works standalone without running services |
@@ -169,9 +169,9 @@ The AI Software Factory is a research platform consisting of four layers:
 Each agent is a TypeScript module that exports a `generate*Artifacts(drift: boolean)` function:
 
 - `drift = false` → Produces outputs that conform to the contracts
-- `drift = true` → Introduces intentional violations simulating AI hallucination
+- `drift = true` → Instructs the LLM to introduce intentional violations simulating AI hallucination
 
-Agents are stateless and deterministic. The orchestration engine runs them in both modes and compares results.
+Agents use LLM calls via Nvidia NIM (Meta Llama models). The orchestration engine runs them in both modes, validates outputs with a structural validator, and runs real Specmatic contract tests against the live services.
 
 ---
 

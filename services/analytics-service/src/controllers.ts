@@ -15,6 +15,26 @@ async function fetchJSON(url: string): Promise<any> {
 }
 
 export async function getAnalytics(req: Request, res: Response): Promise<void> {
+  // Validate from/to query params if provided
+  const fromParam = req.query.from as string | undefined;
+  const toParam = req.query.to as string | undefined;
+
+  if (fromParam !== undefined) {
+    const fromDate = new Date(fromParam);
+    if (isNaN(fromDate.getTime()) || !isNaN(Number(fromParam))) {
+      res.status(400).json({ error: 'Query parameter "from" must be a valid date-time string', code: 400 });
+      return;
+    }
+  }
+
+  if (toParam !== undefined) {
+    const toDate = new Date(toParam);
+    if (isNaN(toDate.getTime()) || !isNaN(Number(toParam))) {
+      res.status(400).json({ error: 'Query parameter "to" must be a valid date-time string', code: 400 });
+      return;
+    }
+  }
+
   try {
     // Attempt to fetch from other services
     const [users, tasks, notifications] = await Promise.all([
@@ -45,11 +65,14 @@ export async function getAnalytics(req: Request, res: Response): Promise<void> {
       cancelled: taskList.filter((t: any) => t.status === 'cancelled').length,
     };
 
+    // Ensure completionRate is always a valid number (never NaN)
+    const completionRate = totalTasks > 0 ? parseFloat(((completedTasks / totalTasks) * 100).toFixed(2)) : 0.0;
+
     res.json({
       totalUsers: userList.length,
       totalTasks,
       completedTasks,
-      completionRate: totalTasks > 0 ? parseFloat(((completedTasks / totalTasks) * 100).toFixed(2)) : 0,
+      completionRate,
       activeNotifications,
       tasksByPriority,
       tasksByStatus,
@@ -61,7 +84,7 @@ export async function getAnalytics(req: Request, res: Response): Promise<void> {
       totalUsers: 0,
       totalTasks: 0,
       completedTasks: 0,
-      completionRate: 0,
+      completionRate: 0.0,
       activeNotifications: 0,
       tasksByPriority: { low: 0, medium: 0, high: 0, critical: 0 },
       tasksByStatus: { pending: 0, in_progress: 0, completed: 0, cancelled: 0 },

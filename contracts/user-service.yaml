@@ -86,6 +86,12 @@ paths:
                       phone: "9876543211"
                       role: "designer"
                       createdAt: "2026-06-15T12:05:00Z"
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
   /users/{id}:
     get:
       operationId: getUserById
@@ -97,8 +103,10 @@ paths:
           schema:
             type: integer
           examples:
-            FETCH_USER:
+            USER_DETAIL:
               value: 1
+            NOT_FOUND:
+              value: 9999
       responses:
         '200':
           description: User details
@@ -126,6 +134,12 @@ paths:
                   value:
                     error: "User not found"
                     code: 404
+        '400':
+          description: Invalid user ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   schemas:

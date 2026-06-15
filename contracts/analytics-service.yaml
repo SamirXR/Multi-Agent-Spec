@@ -54,9 +54,25 @@ paths:
                       completed: 87
                       cancelled: 0
                     generatedAt: "2026-06-15T12:00:00Z"
+        '400':
+          description: Invalid query parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 
 components:
   schemas:
+    Error:
+      type: object
+      required:
+        - error
+        - code
+      properties:
+        error:
+          type: string
+        code:
+          type: integer
     Analytics:
       type: object
       required:
