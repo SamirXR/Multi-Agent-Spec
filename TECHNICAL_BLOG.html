@@ -844,6 +844,7 @@ npx specmatic examples validate --spec-file contracts/analytics-service.yaml</co
           <li><strong>External examples validation as a gate</strong>: Before running expensive contract tests, the pipeline first validates that all external examples conform to their specs. This catches simple structural issues early and fast. <strong>Our recent CI runs highlighted the strictness of this step—it correctly failed our build when we incorrectly used generic <code>(string)</code> placeholders for formatted fields. Switching to precise Specmatic Matchers like <code>(email)</code> and <code>(datetime)</code> proved the framework's effectiveness in enforcing format-compliant, dynamic test payloads.</strong></li>
           <li><strong>No API key dependency</strong>: The CI pipeline only runs Specmatic contract tests — it does not run the LLM agent experiment (which requires an NVIDIA API key). This keeps CI green and reproducible without secrets.</li>
           <li><strong>Java requirement</strong>: Specmatic is a JVM-based tool. The pipeline uses <code>actions/setup-java</code> with Temurin JDK 17 to ensure the Specmatic CLI works correctly.</li>
+          <li><strong>License via GitHub Secrets</strong>: The Specmatic Enterprise license is gitignored and not committed to the repo. Instead, the license content is stored as a GitHub Repository Secret (<code>SPECMATIC_LICENSE</code>) and written to <code>license.txt</code> at CI runtime. This enables resiliency tests in CI without exposing the license in version control.</li>
         </ul>
 
         <h3>Workflow Configuration</h3>
@@ -874,6 +875,9 @@ jobs:
   contract-tests:
     needs: validate-specs
     steps:
+      - name: Write Specmatic license
+        if: ${{ secrets.SPECMATIC_LICENSE != '' }}
+        run: echo "${{ secrets.SPECMATIC_LICENSE }}" > license.txt
       # Start services → poll health → run specmatic test
       - name: Wait for services to be ready
         run: |

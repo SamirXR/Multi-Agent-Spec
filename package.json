@@ -32,6 +32,7 @@
     "examples:validate:all": "npm run examples:validate:users && npm run examples:validate:tasks && npm run examples:validate:notifications && npm run examples:validate:analytics"
   },
   "devDependencies": {
+    "@redocly/cli": "^2.33.2",
     "concurrently": "^9.1.0",
     "specmatic": "^2.47.0"
   }

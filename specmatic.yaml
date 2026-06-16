@@ -22,8 +22,6 @@ dependencies:
         runOptions:
           $ref: "#/components/runOptions/notificationServiceMock"
 
-
-
 components:
   sources:
     localContracts:
@@ -39,6 +37,8 @@ components:
               $ref: "#/components/sources/localContracts"
             specs:
               - user-service.yaml
+      settings:
+        resiliencyTests: all
     taskService:
       description: Task Service
       definitions:
@@ -57,6 +57,8 @@ components:
               $ref: "#/components/sources/localContracts"
             specs:
               - notification-service.yaml
+      settings:
+        resiliencyTests: all
     analyticsService:
       description: Analytics Service
       definitions:
@@ -65,6 +67,8 @@ components:
               $ref: "#/components/sources/localContracts"
             specs:
               - analytics-service.yaml
+      settings:
+        resiliencyTests: all
 
   runOptions:
     userServiceTest:

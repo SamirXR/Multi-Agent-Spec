@@ -80,18 +80,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start User Service
-        run: PORT=${{ env.USER_SERVICE_PORT }} npm run start:user-service &
-
-      - name: Start Task Service
-        run: PORT=${{ env.TASK_SERVICE_PORT }} npm run start:task-service &
-
-      - name: Start Notification Service
-        run: PORT=${{ env.NOTIFICATION_SERVICE_PORT }} npm run start:notification-service &
-
-      - name: Start Analytics Service
+      - name: Write Specmatic license file
+        if: ${{ secrets.SPECMATIC_LICENSE != '' }}
         run: |
-          PORT=${{ env.ANALYTICS_SERVICE_PORT }} \
+          echo "${{ secrets.SPECMATIC_LICENSE }}" > license.txt
+          echo "Specmatic Enterprise license written."
+
+      - name: Start all microservices
+        run: |
+          # Start each service as a background process using npm workspace
+          npm run start:user-service &
+          npm run start:task-service &
+          npm run start:notification-service &
           USER_SERVICE_URL=http://localhost:${{ env.USER_SERVICE_PORT }} \
           TASK_SERVICE_URL=http://localhost:${{ env.TASK_SERVICE_PORT }} \
           NOTIFICATION_SERVICE_URL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }} \
@@ -99,22 +99,24 @@ jobs:
 
       - name: Wait for all services to be healthy
         run: |
-          echo "⏳ Waiting for services to start..."
+          echo "Waiting for services to start..."
           for port in ${{ env.USER_SERVICE_PORT }} ${{ env.TASK_SERVICE_PORT }} ${{ env.NOTIFICATION_SERVICE_PORT }} ${{ env.ANALYTICS_SERVICE_PORT }}; do
-            echo "Waiting for service on port $port..."
-            for i in $(seq 1 40); do
+            echo "  Checking port $port..."
+            for i in $(seq 1 60); do
               if curl -sf http://localhost:$port/health > /dev/null 2>&1; then
-                echo "✅ Service on port $port is ready"
+                echo "  Service on port $port is ready"
                 break
               fi
-              if [ $i -eq 40 ]; then
-                echo "❌ Service on port $port failed to start after 40 seconds"
+              if [ $i -eq 60 ]; then
+                echo "  ERROR: Service on port $port failed to start after 60 seconds"
+                # Print diagnostic info
+                curl -v http://localhost:$port/health 2>&1 || true
                 exit 1
               fi
               sleep 1
             done
           done
-          echo "✅ All services are ready!"
+          echo "All services are ready!"
 
       - name: Run Specmatic contract tests — User Service
         run: npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }}
@@ -181,15 +183,15 @@ jobs:
 
       - name: Generate GitHub Actions summary
         run: |
-          echo "## 📊 Contract Validation Pipeline Report" >> $GITHUB_STEP_SUMMARY
+          echo "## Contract Validation Pipeline Report" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Pipeline Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Stage | Status |" >> $GITHUB_STEP_SUMMARY
           echo "|-------|--------|" >> $GITHUB_STEP_SUMMARY
-          echo "| 🔍 Spec Validation & External Examples | ${{ needs.validate-specs.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🧪 Contract & Resiliency Tests | ${{ needs.contract-tests.result == 'success' && '✅ Passed' || needs.contract-tests.result == 'skipped' && '⏭️ Skipped' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
-          echo "| 🏗️ Dashboard Build | ${{ needs.build.result == 'success' && '✅ Passed' || '❌ Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Spec Validation & External Examples | ${{ needs.validate-specs.result == 'success' && 'Passed' || 'Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Contract & Resiliency Tests | ${{ needs.contract-tests.result == 'success' && 'Passed' || needs.contract-tests.result == 'skipped' && 'Skipped' || 'Failed' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Dashboard Build | ${{ needs.build.result == 'success' && 'Passed' || 'Failed' }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Verified Contracts" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
@@ -205,3 +207,4 @@ jobs:
           echo "- **Resiliency Tests**: Enabled for Task Service (\`resiliencyTests: all\`)" >> $GITHUB_STEP_SUMMARY
           echo "- **Specmatic Version**: v2.47.0" >> $GITHUB_STEP_SUMMARY
           echo "- **External Examples**: Validated before contract tests run" >> $GITHUB_STEP_SUMMARY
+          echo "- **License**: Enterprise license provided via GitHub Secret (\`SPECMATIC_LICENSE\`)" >> $GITHUB_STEP_SUMMARY

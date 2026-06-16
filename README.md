@@ -131,6 +131,21 @@ Specmatic automatically generates tests from the OpenAPI specs, including:
 
 > **Note**: Resiliency tests require a Specmatic Enterprise license. Without a license, only positive tests and basic negative tests run. Place your license file at `./license.txt` to enable full resiliency testing.
 
+### 4b. Validate External Examples
+
+Specmatic external examples are standalone JSON files that define test scenarios independently from the OpenAPI spec. They live in `<service>_examples/` directories alongside each contract.
+
+```bash
+# Validate all external examples against their specs
+npm run examples:validate:all
+
+# Or validate individually:
+npm run examples:validate:users
+npm run examples:validate:tasks
+npm run examples:validate:notifications
+npm run examples:validate:analytics
+```
+
 ### 5. Run the Experiment
 
 ```bash
@@ -281,6 +296,31 @@ Specmatic doesn't just test happy paths — it also sends **deliberately invalid
 | Invalid query param | GET /tasks?status=unknown | 400 Bad Request |
 
 This is why the Specmatic team ran **76 tests** on just the `/tasks` endpoint — each field combination and type mutation generates a separate test case.
+
+---
+
+## CI/CD Pipeline
+
+The project includes a GitHub Actions workflow (`.github/workflows/contract-validation.yml`) that runs on every push and pull request:
+
+| Stage | What It Does |
+|-------|-------------|
+| **Validate Specs & Examples** | Lints OpenAPI contracts with Redocly, validates external examples with `specmatic examples validate` |
+| **Contract & Resiliency Tests** | Starts all 4 microservices, runs `specmatic test` against each (including resiliency tests) |
+| **Build Dashboard** | Compiles the React research dashboard |
+| **Report** | Generates a summary in the GitHub Actions UI |
+
+### Setting Up the Specmatic License for CI
+
+The Specmatic Enterprise license is gitignored and not committed to the repository. To enable resiliency tests in CI:
+
+1. Go to your GitHub repo → **Settings → Secrets and variables → Actions**
+2. Add a **Repository Secret** named `SPECMATIC_LICENSE`
+3. Paste the full contents of your `license.txt` file as the value
+
+The CI workflow writes this secret to `license.txt` before running contract tests.
+
+> Without the license secret, CI will still run positive contract tests but will skip resiliency tests.
 
 ---
 
