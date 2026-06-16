@@ -35,13 +35,17 @@ export async function getAnalytics(req: Request, res: Response): Promise<void> {
     }
   }
 
-  try {
-    // Attempt to fetch from other services
-    const [users, tasks, notifications] = await Promise.all([
-      fetchJSON('http://localhost:3001/users'),
-      fetchJSON('http://localhost:3002/tasks'),
-      fetchJSON('http://localhost:3003/notifications'),
-    ]);
+    const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:3001';
+    const taskServiceUrl = process.env.TASK_SERVICE_URL || 'http://localhost:3002';
+    const notificationServiceUrl = process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:3003';
+
+    try {
+      // Attempt to fetch from other services
+      const [users, tasks, notifications] = await Promise.all([
+        fetchJSON(`${userServiceUrl}/users`),
+        fetchJSON(`${taskServiceUrl}/tasks`),
+        fetchJSON(`${notificationServiceUrl}/notifications`),
+      ]);
 
     const userList = Array.isArray(users) ? users : [];
     const taskList = Array.isArray(tasks) ? tasks : [];

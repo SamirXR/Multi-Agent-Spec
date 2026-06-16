@@ -6,6 +6,12 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  USER_SERVICE_PORT: 3001
+  TASK_SERVICE_PORT: 3002
+  NOTIFICATION_SERVICE_PORT: 3003
+  ANALYTICS_SERVICE_PORT: 3004
+
 jobs:
   # ─────────────────────────────────────────────────────────────────────────────
   # Job 1: Validate specs (lint) and validate external examples against specs
@@ -35,10 +41,10 @@ jobs:
 
       - name: Validate OpenAPI contracts (Redocly lint)
         run: |
-          npx @redocly/cli lint contracts/user-service.yaml --skip-rule=no-unused-components
-          npx @redocly/cli lint contracts/task-service.yaml --skip-rule=no-unused-components
-          npx @redocly/cli lint contracts/notification-service.yaml --skip-rule=no-unused-components
-          npx @redocly/cli lint contracts/analytics-service.yaml --skip-rule=no-unused-components
+          npx @redocly/cli lint contracts/user-service.yaml
+          npx @redocly/cli lint contracts/task-service.yaml
+          npx @redocly/cli lint contracts/notification-service.yaml
+          npx @redocly/cli lint contracts/analytics-service.yaml
 
       - name: Validate external examples against specs (Specmatic)
         run: |
@@ -74,22 +80,27 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Start User Service (port 3001)
-        run: npm run start:user-service &
+      - name: Start User Service
+        run: PORT=${{ env.USER_SERVICE_PORT }} npm run start:user-service &
 
-      - name: Start Task Service (port 3002)
-        run: npm run start:task-service &
+      - name: Start Task Service
+        run: PORT=${{ env.TASK_SERVICE_PORT }} npm run start:task-service &
 
-      - name: Start Notification Service (port 3003)
-        run: npm run start:notification-service &
+      - name: Start Notification Service
+        run: PORT=${{ env.NOTIFICATION_SERVICE_PORT }} npm run start:notification-service &
 
-      - name: Start Analytics Service (port 3004)
-        run: npm run start:analytics-service &
+      - name: Start Analytics Service
+        run: |
+          PORT=${{ env.ANALYTICS_SERVICE_PORT }} \
+          USER_SERVICE_URL=http://localhost:${{ env.USER_SERVICE_PORT }} \
+          TASK_SERVICE_URL=http://localhost:${{ env.TASK_SERVICE_PORT }} \
+          NOTIFICATION_SERVICE_URL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }} \
+          npm run start:analytics-service &
 
       - name: Wait for all services to be healthy
         run: |
           echo "⏳ Waiting for services to start..."
-          for port in 3001 3002 3003 3004; do
+          for port in ${{ env.USER_SERVICE_PORT }} ${{ env.TASK_SERVICE_PORT }} ${{ env.NOTIFICATION_SERVICE_PORT }} ${{ env.ANALYTICS_SERVICE_PORT }}; do
             echo "Waiting for service on port $port..."
             for i in $(seq 1 40); do
               if curl -sf http://localhost:$port/health > /dev/null 2>&1; then
@@ -106,16 +117,16 @@ jobs:
           echo "✅ All services are ready!"
 
       - name: Run Specmatic contract tests — User Service
-        run: npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:3001
+        run: npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }}
 
       - name: Run Specmatic contract tests — Task Service (+ resiliency)
-        run: npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:3002
+        run: npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }}
 
       - name: Run Specmatic contract tests — Notification Service
-        run: npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:3003
+        run: npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }}
 
       - name: Run Specmatic contract tests — Analytics Service
-        run: npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:3004
+        run: npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:${{ env.ANALYTICS_SERVICE_PORT }}
 
       - name: Upload Specmatic test reports
         uses: actions/upload-artifact@v4

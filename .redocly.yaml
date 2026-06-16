@@ -1,0 +1,23 @@
+# Redocly CLI configuration for API contract linting
+# Disables rules that are not applicable for internal microservices
+# (no auth, localhost development servers)
+
+apis:
+  user-service@v1:
+    root: contracts/user-service.yaml
+  task-service@v1:
+    root: contracts/task-service.yaml
+  notification-service@v1:
+    root: contracts/notification-service.yaml
+  analytics-service@v1:
+    root: contracts/analytics-service.yaml
+
+rules:
+  # Disabled: Internal services don't require security/auth schemes
+  security-defined: off
+  # Disabled: Internal APIs don't need license info
+  info-license: off
+  # Disabled: Using localhost URLs for development is expected
+  no-server-example.com: off
+  # Disabled: Shared schema components are defined centrally
+  no-unused-components: off

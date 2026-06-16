@@ -178,10 +178,10 @@ async function runAllSpecmaticTests(): Promise<SpecmaticTestResult[]> {
   }
 
   const services = [
-    { contract: 'user-service.yaml', baseUrl: 'http://localhost:3001', name: 'user-service', dir: 'user-service' },
-    { contract: 'task-service.yaml', baseUrl: 'http://localhost:3002', name: 'task-service', dir: 'task-service' },
-    { contract: 'notification-service.yaml', baseUrl: 'http://localhost:3003', name: 'notification-service', dir: 'notification-service' },
-    { contract: 'analytics-service.yaml', baseUrl: 'http://localhost:3004', name: 'analytics-service', dir: 'analytics-service' },
+    { contract: 'user-service.yaml', baseUrl: process.env.USER_SERVICE_URL || 'http://localhost:3001', name: 'user-service', dir: 'user-service' },
+    { contract: 'task-service.yaml', baseUrl: process.env.TASK_SERVICE_URL || 'http://localhost:3002', name: 'task-service', dir: 'task-service' },
+    { contract: 'notification-service.yaml', baseUrl: process.env.NOTIFICATION_SERVICE_URL || 'http://localhost:3003', name: 'notification-service', dir: 'notification-service' },
+    { contract: 'analytics-service.yaml', baseUrl: process.env.ANALYTICS_SERVICE_URL || 'http://localhost:3004', name: 'analytics-service', dir: 'analytics-service' },
   ];
 
   const results: SpecmaticTestResult[] = [];
