@@ -1,0 +1,36 @@
+{
+  "http-request": {
+    "method": "GET",
+    "path": "/analytics",
+    "query": {
+      "from": "(datetime)",
+      "to": "(datetime)"
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "totalUsers": "(number)",
+      "totalTasks": "(number)",
+      "completedTasks": "(number)",
+      "completionRate": "(number)",
+      "activeNotifications": "(number)",
+      "tasksByPriority": {
+        "low": "(number)",
+        "medium": "(number)",
+        "high": "(number)",
+        "critical": "(number)"
+      },
+      "tasksByStatus": {
+        "pending": "(number)",
+        "in_progress": "(number)",
+        "completed": "(number)",
+        "cancelled": "(number)"
+      },
+      "generatedAt": "(datetime)"
+    }
+  }
+}

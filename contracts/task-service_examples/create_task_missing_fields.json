@@ -1,0 +1,22 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/tasks",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "title": "(string)"
+    }
+  },
+  "http-response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "error": "(string)",
+      "code": "(number)"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "http-request": {
+    "method": "GET",
+    "path": "/tasks",
+    "query": {
+      "status": "pending"
+    }
+  },
+  "http-response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "id": "(number)",
+        "title": "(string)",
+        "description": "(string)",
+        "assigneeId": "(number)",
+        "status": "pending",
+        "priority": "low",
+        "createdAt": "(datetime)"
+      }
+    ]
+  }
+}

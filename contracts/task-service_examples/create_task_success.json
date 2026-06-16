@@ -1,0 +1,30 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/tasks",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "title": "(string)",
+      "description": "(string)",
+      "assigneeId": "(number)",
+      "priority": "high"
+    }
+  },
+  "http-response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "(number)",
+      "title": "(string)",
+      "description": "(string)",
+      "assigneeId": "(number)",
+      "status": "pending",
+      "priority": "high",
+      "createdAt": "(datetime)"
+    }
+  }
+}

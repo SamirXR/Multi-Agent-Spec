@@ -1,0 +1,29 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/users",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "(string)",
+      "email": "(email)",
+      "phone": "(string)",
+      "role": "developer"
+    }
+  },
+  "http-response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "(number)",
+      "name": "(string)",
+      "email": "(email)",
+      "phone": "(string)",
+      "role": "developer",
+      "createdAt": "(datetime)"
+    }
+  }
+}

@@ -24,7 +24,12 @@
     "contract:test:tasks": "npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:3002",
     "contract:test:notifications": "npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:3003",
     "contract:test:analytics": "npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:3004",
-    "contract:test:all": "npm run contract:test:users && npm run contract:test:tasks && npm run contract:test:notifications && npm run contract:test:analytics"
+    "contract:test:all": "npm run contract:test:users && npm run contract:test:tasks && npm run contract:test:notifications && npm run contract:test:analytics",
+    "examples:validate:users": "npx specmatic examples validate --spec-file contracts/user-service.yaml",
+    "examples:validate:tasks": "npx specmatic examples validate --spec-file contracts/task-service.yaml",
+    "examples:validate:notifications": "npx specmatic examples validate --spec-file contracts/notification-service.yaml",
+    "examples:validate:analytics": "npx specmatic examples validate --spec-file contracts/analytics-service.yaml",
+    "examples:validate:all": "npm run examples:validate:users && npm run examples:validate:tasks && npm run examples:validate:notifications && npm run examples:validate:analytics"
   },
   "devDependencies": {
     "concurrently": "^9.1.0",

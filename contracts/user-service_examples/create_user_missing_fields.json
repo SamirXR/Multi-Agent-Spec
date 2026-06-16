@@ -1,0 +1,22 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/users",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "(string)"
+    }
+  },
+  "http-response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "error": "(string)",
+      "code": "(number)"
+    }
+  }
+}

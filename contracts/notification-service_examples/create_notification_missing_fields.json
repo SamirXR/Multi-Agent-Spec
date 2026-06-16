@@ -1,0 +1,22 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/notifications",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "userId": "(number)"
+    }
+  },
+  "http-response": {
+    "status": 400,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "error": "(string)",
+      "code": "(number)"
+    }
+  }
+}

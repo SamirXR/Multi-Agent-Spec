@@ -1,0 +1,28 @@
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/notifications",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "userId": "(number)",
+      "message": "(string)",
+      "type": "info"
+    }
+  },
+  "http-response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "(number)",
+      "userId": "(number)",
+      "message": "(string)",
+      "type": "info",
+      "read": "(boolean)",
+      "createdAt": "(datetime)"
+    }
+  }
+}

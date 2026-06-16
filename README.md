@@ -2,6 +2,38 @@
 
 **Executable API Contracts for AI-Assisted Development** — A research platform demonstrating how [Specmatic](https://specmatic.io) contract testing prevents integration failures in multi-agent AI software factories.
 
+🚀 **Quick Start & API Key Configuration**
+
+The AI agent simulation requires an **NVIDIA NIM API Key** to run experiments using the Llama-4 model. Follow these quick steps to set it up:
+
+1. **Clone and Install**:
+   ```bash
+   git clone https://github.com/SamirXR/Multi-Agent-Spec.git
+   cd Multi-Agent-Spec
+   npm install
+   ```
+2. **Add API Key**:
+   Create the `.env` file in the `agents` directory and add your key:
+   ```bash
+   # Create file
+   cp agents/.env.example agents/.env
+   
+   # Open agents/.env and set the key:
+   NVIDIA_API_KEY="your-nvapi-key-here"
+   NVIDIA_MODEL="meta/llama-4-maverick-17b-128e-instruct"
+   ```
+3. **Run Services & Experiment**:
+   ```bash
+   # Start all microservices
+   npm run start:services
+   
+   # Run the Multi-Agent software factory experiment
+   npm run experiment
+   
+   # Start the research dashboard
+   npm run start:dashboard
+   ```
+
 ---
 
 ## Overview
@@ -130,9 +162,13 @@ Open http://localhost:5173 to see the research dashboard with experiment results
 Multi-Agent-Spec/
 ├── contracts/                    # OpenAPI 3.0 contract specifications
 │   ├── user-service.yaml
+│   ├── user-service_examples/    # External examples for user-service
 │   ├── task-service.yaml
+│   ├── task-service_examples/    # External examples for task-service
 │   ├── notification-service.yaml
-│   └── analytics-service.yaml
+│   ├── notification-service_examples/  # External examples for notification-service
+│   ├── analytics-service.yaml
+│   └── analytics-service_examples/     # External examples for analytics-service
 ├── services/                     # Express microservices
 │   ├── user-service/
 │   ├── task-service/
@@ -179,6 +215,54 @@ systemUnderTest:
     runOptions:
       $ref: "#/components/runOptions/userServiceTest"
 ```
+
+---
+
+## External Examples
+
+Specmatic supports **external examples** — standalone JSON files that define explicit test scenarios outside the OpenAPI spec. For each contract `foo-service.yaml`, Specmatic automatically discovers a `foo-service_examples/` directory in the same folder.
+
+Each JSON file contains an `http-request` / `http-response` pair:
+
+```json
+// contracts/task-service_examples/create_task_success.json
+{
+  "http-request": {
+    "method": "POST",
+    "path": "/tasks",
+    "headers": { "Content-Type": "application/json" },
+    "body": {
+      "title": "Implement login API",
+      "description": "Build the authentication endpoint with JWT",
+      "assigneeId": 1,
+      "priority": "high"
+    }
+  },
+  "http-response": {
+    "status": 201,
+    "body": {
+      "id": "(number)",
+      "title": "Implement login API",
+      "status": "pending",
+      "createdAt": "(string)"
+    }
+  }
+}
+```
+
+Validate all external examples against their specs:
+
+```bash
+npm run examples:validate:all
+
+# Or validate individually:
+npm run examples:validate:users
+npm run examples:validate:tasks
+npm run examples:validate:notifications
+npm run examples:validate:analytics
+```
+
+> **Why external examples?** Inline examples in the spec are great for documentation, but external examples let you maintain test scenarios independently — including negative test cases (missing fields, invalid values) — and validate them on every CI run.
 
 ---
 

@@ -1,0 +1,20 @@
+{
+  "http-request": {
+    "method": "GET",
+    "path": "/users/1"
+  },
+  "http-response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "id": "(number)",
+      "name": "(string)",
+      "email": "(email)",
+      "phone": "(string)",
+      "role": "developer",
+      "createdAt": "(datetime)"
+    }
+  }
+}
