@@ -1,3 +1,16 @@
+# Specmatic v3 Configuration — REFERENCE ONLY
+# =============================================
+# This file is named specmatic-config-example.yaml (not specmatic.yaml) to prevent
+# Specmatic from auto-loading it during `specmatic test --spec-file ... --testBaseURL ...`
+# CLI invocations used in CI and npm scripts.
+#
+# The v3 config's automatic SUT/dependency management (starting mocks, binding ports)
+# conflicts with v2-style CLI args that explicitly specify --testBaseURL.
+#
+# To USE this config with `specmatic test` (no extra args), rename it to specmatic.yaml.
+# To use v2-style CLI (recommended for CI), keep this name and use:
+#   specmatic test contracts/X.yaml --testBaseURL=http://localhost:PORT --resiliency
+#
 version: 3
 
 # Test the Task Service as the System Under Test (SUT).
@@ -37,8 +50,6 @@ components:
               $ref: "#/components/sources/localContracts"
             specs:
               - user-service.yaml
-      settings:
-        resiliencyTests: all
     taskService:
       description: Task Service
       definitions:
@@ -47,8 +58,6 @@ components:
               $ref: "#/components/sources/localContracts"
             specs:
               - task-service.yaml
-      settings:
-        resiliencyTests: all
     notificationService:
       description: Notification Service
       definitions:
@@ -57,8 +66,6 @@ components:
               $ref: "#/components/sources/localContracts"
             specs:
               - notification-service.yaml
-      settings:
-        resiliencyTests: all
     analyticsService:
       description: Analytics Service
       definitions:
@@ -67,8 +74,6 @@ components:
               $ref: "#/components/sources/localContracts"
             specs:
               - analytics-service.yaml
-      settings:
-        resiliencyTests: all
 
   runOptions:
     userServiceTest:

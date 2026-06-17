@@ -118,17 +118,17 @@ jobs:
           done
           echo "All services are ready!"
 
-      - name: Run Specmatic contract tests — User Service
-        run: npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }}
+      - name: Run Specmatic contract tests — User Service (+ resiliency)
+        run: npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }} --resiliency
 
       - name: Run Specmatic contract tests — Task Service (+ resiliency)
-        run: npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }}
+        run: npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }} --resiliency
 
-      - name: Run Specmatic contract tests — Notification Service
-        run: npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }}
+      - name: Run Specmatic contract tests — Notification Service (+ resiliency)
+        run: npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }} --resiliency
 
-      - name: Run Specmatic contract tests — Analytics Service
-        run: npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:${{ env.ANALYTICS_SERVICE_PORT }}
+      - name: Run Specmatic contract tests — Analytics Service (+ resiliency)
+        run: npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:${{ env.ANALYTICS_SERVICE_PORT }} --resiliency
 
       - name: Upload Specmatic test reports
         uses: actions/upload-artifact@v4
@@ -204,7 +204,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Specmatic Configuration" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Resiliency Tests**: Enabled for Task Service (\`resiliencyTests: all\`)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Resiliency Tests**: Enabled for all services via \`--resiliency\` CLI flag" >> $GITHUB_STEP_SUMMARY
           echo "- **Specmatic Version**: v2.47.0" >> $GITHUB_STEP_SUMMARY
-          echo "- **External Examples**: Validated before contract tests run" >> $GITHUB_STEP_SUMMARY
+          echo "- **External Examples**: Validated before contract tests run (15 files across 4 services)" >> $GITHUB_STEP_SUMMARY
           echo "- **License**: Enterprise license provided via GitHub Secret (\`SPECMATIC_LICENSE\`)" >> $GITHUB_STEP_SUMMARY

@@ -842,9 +842,12 @@ npx specmatic examples validate --spec-file contracts/analytics-service.yaml</co
         <ul>
           <li><strong>Health-check polling instead of <code>sleep</code></strong>: Rather than blindly sleeping for a fixed time after starting services, the pipeline polls each service's <code>/health</code> endpoint with retries. This is more reliable and eliminates flaky failures from slow service startup.</li>
           <li><strong>External examples validation as a gate</strong>: Before running expensive contract tests, the pipeline first validates that all external examples conform to their specs. This catches simple structural issues early and fast. <strong>Our recent CI runs highlighted the strictness of this step—it correctly failed our build when we incorrectly used generic <code>(string)</code> placeholders for formatted fields. Switching to precise Specmatic Matchers like <code>(email)</code> and <code>(datetime)</code> proved the framework's effectiveness in enforcing format-compliant, dynamic test payloads.</strong></li>
+          <li><strong>Resiliency via CLI flag, not config file</strong>: Resiliency tests are enabled for all services using the <code>--resiliency</code> CLI flag on each <code>specmatic test</code> invocation. We initially tried placing <code>resiliencyTests: all</code> inside the Specmatic v3 config's <code>settings</code> block, but this caused <code>specmatic examples validate</code> to crash because the <code>MockSettings</code> class does not recognize the <code>resiliencyTests</code> field. The CLI flag approach is cleaner: resiliency is only enabled during contract testing, never during example validation or stub generation.</li>
+          <li><strong>V2-style CLI over v3 config for CI</strong>: Our CI uses explicit <code>--spec-file</code> and <code>--testBaseURL</code> arguments (v2-style) instead of Specmatic's v3 auto-discovery config. We discovered that the v3 config's automatic SUT/dependency management (starting mock servers, binding ports) conflicts with manually started services in CI. The v3 config is preserved as <code>specmatic-config-example.yaml</code> for reference.</li>
           <li><strong>No API key dependency</strong>: The CI pipeline only runs Specmatic contract tests — it does not run the LLM agent experiment (which requires an NVIDIA API key). This keeps CI green and reproducible without secrets.</li>
           <li><strong>Java requirement</strong>: Specmatic is a JVM-based tool. The pipeline uses <code>actions/setup-java</code> with Temurin JDK 17 to ensure the Specmatic CLI works correctly.</li>
           <li><strong>License via GitHub Secrets</strong>: The Specmatic Enterprise license is gitignored and not committed to the repo. Instead, the license content is stored as a GitHub Repository Secret (<code>SPECMATIC_LICENSE</code>) and written to <code>license.txt</code> at CI runtime. This enables resiliency tests in CI without exposing the license in version control.</li>
+          <li><strong>Explicit <code>yaml</code> dependency</strong>: The <code>@redocly/cli</code> depends on <code>redoc</code>, which requires the <code>yaml</code> npm package at runtime. With npm workspaces, this transitive dependency may not be hoisted to the root <code>node_modules</code>, causing a <code>MODULE_NOT_FOUND</code> crash during <code>redocly lint</code>. Adding <code>yaml</code> as an explicit devDependency in the root <code>package.json</code> resolves this reliably.</li>
         </ul>
 
         <h3>Workflow Configuration</h3>
@@ -888,7 +891,7 @@ jobs:
             done
           done
       - run: npx specmatic test contracts/user-service.yaml \
-               --testBaseURL=http://localhost:3001
+               --testBaseURL=http://localhost:3001 --resiliency
       # ... remaining services</code></pre>
 
         <div class="callout">
@@ -896,6 +899,28 @@ jobs:
             <strong>Lesson learned:</strong> Running Specmatic in CI caught issues we missed locally — particularly around Content-Type header enforcement and edge cases in query parameter validation. CI is the true litmus test for contract compliance.
           </p>
         </div>
+
+        <h3>Debugging CI Failures: Three Root Causes</h3>
+        <p>
+          Getting the CI pipeline to pass green was itself a valuable exercise in understanding Specmatic's internals. We encountered three distinct failure modes, each teaching us something about the tool's architecture:
+        </p>
+        <ol>
+          <li>
+            <strong><code>MODULE_NOT_FOUND: yaml</code> — npm workspace hoisting issue</strong><br>
+            The <code>@redocly/cli</code> depends on <code>redoc</code>, which transitively depends on <code>yaml</code>. With npm workspaces, <code>yaml</code> gets installed deep in <code>node_modules/@redocly/cli/node_modules/redoc/node_modules/swagger2openapi/node_modules/yaml/</code> — but <code>redoc.lib.js</code> calls <code>require('yaml')</code> at the top level, expecting it to be hoisted. The fix was adding <code>yaml</code> as an explicit devDependency in the root <code>package.json</code>. This is a common npm workspace gotcha that doesn't appear in single-package projects.
+          </li>
+          <li>
+            <strong><code>UnrecognizedPropertyException: resiliencyTests</code> — v3 config <code>MockSettings</code> limitation</strong><br>
+            We placed <code>resiliencyTests: all</code> under each service's <code>settings</code> block in <code>specmatic.yaml</code>. While this setting is valid for test-mode services, Specmatic's <code>examples validate</code> command loads the same config and treats all services as mocks. The <code>MockSettings</code> class has only 7 known properties (<code>startTimeoutInMilliseconds</code>, <code>generative</code>, <code>delayInMilliseconds</code>, etc.) — <code>resiliencyTests</code> is not one of them, causing a deserialization crash. The fix was removing <code>resiliencyTests</code> from the config and passing <code>--resiliency</code> as a CLI flag during <code>specmatic test</code> invocations only.
+          </li>
+          <li>
+            <strong>Connection refused — v3 config auto-loading conflicts with v2 CLI</strong><br>
+            When <code>specmatic test --spec-file X.yaml --testBaseURL=http://localhost:3001</code> runs, it still auto-loads <code>specmatic.yaml</code> from the working directory. The v3 config declares a SUT (task-service) and dependency mocks (user-service mock on port 9001, notification-service mock on port 9003). Specmatic's internal orchestration attempted to manage these mocks, which interfered with the explicitly started user-service on port 3001 — causing connection refused errors on every test. The fix was renaming <code>specmatic.yaml</code> to <code>specmatic-config-example.yaml</code> to prevent auto-loading, since our CI uses v2-style explicit CLI arguments that don't need the v3 config.
+          </li>
+        </ol>
+        <p>
+          After these three fixes, the full CI pipeline passes: 4 Redocly lint validations, 15 external example validations (across 4 services), 24 contract tests (9 user + 6 task + 6 notification + 3 analytics), and a successful dashboard build.
+        </p>
       </section>
 
       <!-- SPECADEMY LEARNINGS SECTION -->

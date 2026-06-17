@@ -200,7 +200,7 @@ Multi-Agent-Spec/
 ├── docs/
 │   ├── ARCHITECTURE.md           # System architecture
 │   └── RESEARCH_REPORT.md        # Research findings
-├── specmatic.yaml                # Specmatic v3 configuration
+├── specmatic-config-example.yaml # Specmatic v3 configuration (reference, not auto-loaded)
 ├── license.txt                   # Specmatic Enterprise license (required for resiliency tests)
 └── package.json                  # npm workspaces root
 ```
@@ -209,7 +209,9 @@ Multi-Agent-Spec/
 
 ## Specmatic Configuration
 
-The `specmatic.yaml` file uses the [Specmatic v3 config format](https://docs.specmatic.io/references/configuration/getting-started). Key structure:
+The `specmatic-config-example.yaml` file demonstrates the [Specmatic v3 config format](https://docs.specmatic.io/references/configuration/getting-started) for auto-discovery mode. However, this project uses **v2-style CLI invocations** (`specmatic test --spec-file ... --testBaseURL ...`) in CI and npm scripts, which are more explicit and avoid port conflicts with the v3 config's automatic SUT/dependency management.
+
+Key structure of the v3 config:
 
 - **`systemUnderTest`** — Defines which service is being tested and how to run tests against it
 - **`dependencies`** — Lists services that the SUT depends on (run as mocks)
@@ -340,6 +342,13 @@ The CI workflow writes this secret to `license.txt` before running contract test
 - [Research Report](docs/RESEARCH_REPORT.md) — Full research findings and methodology
 - [Specmatic Documentation](https://docs.specmatic.io) — Official Specmatic docs
 - [Specmatic v3 Config](https://docs.specmatic.io/references/configuration/getting-started) — Configuration reference
+- [Specademy](https://specmatic.io/specademy) — Specmatic learning platform
+
+---
+
+## Specademy Certificate
+
+The [Specademy](https://specmatic.io/specademy) certificate of completion is included in this repository at [`assets/specademy_certificate.png`](assets/specademy_certificate.png).
 
 ---
 

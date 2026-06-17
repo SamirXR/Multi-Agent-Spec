@@ -88,7 +88,7 @@ Specmatic/
 ├── dashboard/           → React + Vite + TypeScript dashboard
 ├── .github/workflows/   → CI/CD pipeline
 ├── docs/                → Documentation
-├── specmatic.yaml       → Specmatic configuration
+├── specmatic-config-example.yaml → Specmatic v3 config (reference)
 └── package.json         → Root workspace config
 ```
 
