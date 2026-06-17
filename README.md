@@ -342,13 +342,6 @@ The CI workflow writes this secret to `license.txt` before running contract test
 - [Research Report](docs/RESEARCH_REPORT.md) — Full research findings and methodology
 - [Specmatic Documentation](https://docs.specmatic.io) — Official Specmatic docs
 - [Specmatic v3 Config](https://docs.specmatic.io/references/configuration/getting-started) — Configuration reference
-- [Specademy](https://specmatic.io/specademy) — Specmatic learning platform
-
----
-
-## Specademy Certificate
-
-The [Specademy](https://specmatic.io/specademy) certificate of completion is included in this repository at [`assets/specademy_certificate.png`](assets/specademy_certificate.png).
 
 ---
 

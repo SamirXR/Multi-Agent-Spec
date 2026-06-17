@@ -81,10 +81,15 @@ jobs:
         run: npm install
 
       - name: Write Specmatic license file
-        if: ${{ secrets.SPECMATIC_LICENSE != '' }}
+        env:
+          SPECMATIC_LICENSE: ${{ secrets.SPECMATIC_LICENSE }}
         run: |
-          echo "${{ secrets.SPECMATIC_LICENSE }}" > license.txt
-          echo "Specmatic Enterprise license written."
+          if [ -n "$SPECMATIC_LICENSE" ]; then
+            echo "$SPECMATIC_LICENSE" > license.txt
+            echo "Specmatic Enterprise license written."
+          else
+            echo "No SPECMATIC_LICENSE secret found — resiliency tests will use OSS license."
+          fi
 
       - name: Start all microservices
         run: |
