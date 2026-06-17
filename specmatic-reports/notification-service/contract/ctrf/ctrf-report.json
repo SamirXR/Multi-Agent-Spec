@@ -3,8 +3,8 @@
     "name": "Specmatic v2.47.0"
   },
   "summary": {
-    "tests": 6,
-    "passed": 6,
+    "tests": 21,
+    "passed": 21,
     "failed": 0,
     "skipped": 0,
     "pending": 0,
@@ -12,10 +12,10 @@
   },
   "tests": [
     {
-      "id": "619d7045-50b5-4abb-a439-2226b322bc4c",
-      "name": "Scenario: POST /notifications -> 201 with the request from the example 'CREATE_NOTIFICATION'",
+      "id": "24a3bac9-fe1e-4d1c-84fd-622cd2c0afaf",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys",
       "status": "passed",
-      "duration": 82,
+      "duration": 76,
       "suite": "contracts/notification-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -29,12 +29,12 @@
         "valid": true,
         "wip": false,
         "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"info\"\n}",
-        "inputTime": 1781706000920,
+        "inputTime": 1781706968662,
         "outputs": [
           {
             "title": "Response",
-            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 125\nETag: W/\"7d-C8YxiyPG2w7jTZgqTTDzWLavdTY\"\nDate: Wed, 17 Jun 2026 14:20:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 1,\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"info\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:20:00.956Z\"\n}",
-            "time": 1781706001002
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 125\nETag: W/\"7d-/FAI0+eH6+A0GxQbKuLdovtGCnQ\"\nDate: Wed, 17 Jun 2026 14:36:08 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 1,\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"info\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:08.694Z\"\n}",
+            "time": 1781706968738
           }
         ],
         "reasons": [
@@ -49,10 +49,10 @@
       }
     },
     {
-      "id": "f4c5ec38-fb06-4cd7-b006-f01571bbfe07",
-      "name": "Scenario: POST /notifications -> 201 with the request from the example 'create_notification_success'",
+      "id": "3378169e-aabc-43c3-b19c-7610c38f3b54",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key type is set to 'success' from enum",
       "status": "passed",
-      "duration": 41,
+      "duration": 14,
       "suite": "contracts/notification-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -65,13 +65,142 @@
       "extra": {
         "valid": true,
         "wip": false,
-        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 986,\n    \"message\": \"aperiam\",\n    \"type\": \"info\"\n}",
-        "inputTime": 1781706002489,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706968753,
         "outputs": [
           {
             "title": "Response",
-            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 107\nETag: W/\"6b-5djSkW59UFTxSiEWCe5hCJ8TRaw\"\nDate: Wed, 17 Jun 2026 14:20:02 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 2,\n    \"userId\": 986,\n    \"message\": \"aperiam\",\n    \"type\": \"info\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:20:02.504Z\"\n}",
-            "time": 1781706002531
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 128\nETag: W/\"80-8G/8o/yLM+Dkmiky//6MbjxpfCs\"\nDate: Wed, 17 Jun 2026 14:36:08 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 2,\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"success\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:08.761Z\"\n}",
+            "time": 1781706968768
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "dfcf7c28-06cb-4f11-8623-47df5584877b",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 15,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706968771,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 128\nETag: W/\"80-KXGcsUjYNwVpUTf3tIA1SFjIxVs\"\nDate: Wed, 17 Jun 2026 14:36:08 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 3,\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"warning\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:08.779Z\"\n}",
+            "time": 1781706968786
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "da7d4b49-05f5-4ba8-a1ae-1009903d1f92",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 16,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706968788,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 126\nETag: W/\"7e-OyOtzbkZqMrq5UEyF4qOTgOmal8\"\nDate: Wed, 17 Jun 2026 14:36:08 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 4,\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"error\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:08.798Z\"\n}",
+            "time": 1781706968804
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "85127423-0e82-4574-92ef-f7905fc1941c",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys",
+      "status": "passed",
+      "duration": 32,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706969822,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 107\nETag: W/\"6b-QSa1Y8q/Y1rQMMQ5GOYgrP65h/8\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 5,\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"info\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:09.835Z\"\n}",
+            "time": 1781706969854
           }
         ],
         "reasons": [
@@ -86,10 +215,139 @@
       }
     },
     {
-      "id": "285b0be7-abbd-4516-8fe1-2d05a88138c9",
-      "name": "Scenario: POST /notifications -> 400 with the request from the example 'create_notification_missing_fields'",
+      "id": "a4600797-088e-407d-808f-39ee311a38f8",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key type is set to 'success' from enum",
       "status": "passed",
-      "duration": 24,
+      "duration": 16,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706969857,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 110\nETag: W/\"6e-JfQ82IrLmcU6z1cDtMza4MPk9vA\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 6,\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"success\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:09.864Z\"\n}",
+            "time": 1781706969873
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "21b15eaf-9434-4e4f-90b2-47c412bb624f",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 17,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706969875,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 110\nETag: W/\"6e-VyiiOmfvY1vCiZ2fJ98BYP/oWPw\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 7,\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"warning\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:09.885Z\"\n}",
+            "time": 1781706969893
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "c9fca54c-2d50-43bb-aba9-39767cbb6459",
+      "name": "+ve  Scenario: POST /notifications -> 201 with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 15,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706969895,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 108\nETag: W/\"6c-MuwyHX9fSGajtwB+y2AQp6Ovf/E\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 8,\n    \"userId\": 756,\n    \"message\": \"aliquam\",\n    \"type\": \"error\",\n    \"read\": false,\n    \"createdAt\": \"2026-06-17T14:36:09.904Z\"\n}",
+            "time": 1781706969910
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "c135eccb-7fc5-40c7-b3c9-b9f8865789d4",
+      "name": "+ve  Scenario: POST /notifications -> 400 with the request from the example 'create_notification_missing_fields'",
+      "status": "passed",
+      "duration": 12,
       "suite": "contracts/notification-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -102,13 +360,13 @@
       "extra": {
         "valid": true,
         "wip": false,
-        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 516\n}",
-        "inputTime": 1781706002539,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 186\n}",
+        "inputTime": 1781706969917,
         "outputs": [
           {
             "title": "Response",
-            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 61\nETag: W/\"3d-9Sh3TIztYC+lhgjj9sMClIo8VCI\"\nDate: Wed, 17 Jun 2026 14:20:02 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message, type\",\n    \"code\": 400\n}",
-            "time": 1781706002563
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 61\nETag: W/\"3d-9Sh3TIztYC+lhgjj9sMClIo8VCI\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message, type\",\n    \"code\": 400\n}",
+            "time": 1781706969930
           }
         ],
         "reasons": [
@@ -123,10 +381,10 @@
       }
     },
     {
-      "id": "6a34c43a-3740-423a-a30c-15734a06ad85",
-      "name": "Scenario: GET /notifications -> 200 with the request from the example 'NOTIFICATIONS_LIST'",
+      "id": "747e44f4-ab4e-4452-a7ed-aff2c6992e2b",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'NOTIFICATIONS_LIST'",
       "status": "passed",
-      "duration": 19,
+      "duration": 16,
       "suite": "contracts/notification-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -139,12 +397,12 @@
         "valid": true,
         "wip": false,
         "input": "GET /notifications\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781706002567,
+        "inputTime": 1781706969932,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 235\nETag: W/\"eb-Ub12u5CvtnPnrSOUFDUSeGdPr4A\"\nDate: Wed, 17 Jun 2026 14:20:02 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:20:00.956Z\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 986,\n        \"message\": \"aperiam\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:20:02.504Z\"\n    }\n]",
-            "time": 1781706002587
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 951\nETag: W/\"3b7-LMaUp/MHz3LgkSa8rfunycdsvnk\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.694Z\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.761Z\"\n    },\n    {\n        \"id\": 3,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.779Z\"\n    },\n    {\n        \"id\": 4,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.798Z\"\n    },\n    {\n        \"id\": 5,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.835Z\"\n    },\n    {\n        \"id\": 6,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.864Z\"\n    },\n    {\n        \"id\": 7,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.885Z\"\n    },\n    {\n        \"id\": 8,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.904Z\"\n    }\n]",
+            "time": 1781706969948
           }
         ],
         "reasons": [
@@ -159,10 +417,136 @@
       }
     },
     {
-      "id": "c8eff71e-872e-4bdd-8978-2d77497d709a",
-      "name": "Scenario: GET /notifications -> 200 with the request from the example 'list_notifications'",
+      "id": "c17899c1-2b9b-482c-8212-7228563484bc",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'NOTIFICATIONS_LIST' where REQUEST.PARAMETERS.QUERY contains the param 'read'",
       "status": "passed",
-      "duration": 15,
+      "duration": 14,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?read=false\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706969954,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 951\nETag: W/\"3b7-LMaUp/MHz3LgkSa8rfunycdsvnk\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.694Z\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.761Z\"\n    },\n    {\n        \"id\": 3,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.779Z\"\n    },\n    {\n        \"id\": 4,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.798Z\"\n    },\n    {\n        \"id\": 5,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.835Z\"\n    },\n    {\n        \"id\": 6,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.864Z\"\n    },\n    {\n        \"id\": 7,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.885Z\"\n    },\n    {\n        \"id\": 8,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.904Z\"\n    }\n]",
+            "time": 1781706969969
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8e8dfff9-ca90-4fd1-96fc-20eacf50ebe2",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'NOTIFICATIONS_LIST' where REQUEST.PARAMETERS.QUERY contains the param 'userId'",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=947\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706969971,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706969980
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "16183a3a-8271-40fd-9317-f0e512d90131",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'NOTIFICATIONS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read'",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=662&read=true\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706969983,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706969993
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "ed6d5a8b-af7a-47ef-8e34-171084642035",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications'",
+      "status": "passed",
+      "duration": 36,
       "suite": "contracts/notification-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -175,12 +559,180 @@
         "valid": true,
         "wip": false,
         "input": "GET /notifications\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781706002590,
+        "inputTime": 1781706969996,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 235\nETag: W/\"eb-Ub12u5CvtnPnrSOUFDUSeGdPr4A\"\nDate: Wed, 17 Jun 2026 14:20:02 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:20:00.956Z\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 986,\n        \"message\": \"aperiam\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:20:02.504Z\"\n    }\n]",
-            "time": 1781706002606
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 951\nETag: W/\"3b7-LMaUp/MHz3LgkSa8rfunycdsvnk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.694Z\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.761Z\"\n    },\n    {\n        \"id\": 3,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.779Z\"\n    },\n    {\n        \"id\": 4,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.798Z\"\n    },\n    {\n        \"id\": 5,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.835Z\"\n    },\n    {\n        \"id\": 6,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.864Z\"\n    },\n    {\n        \"id\": 7,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.885Z\"\n    },\n    {\n        \"id\": 8,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.904Z\"\n    }\n]",
+            "time": 1781706970032
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "03bffef5-5a50-4f2b-be4d-cc445984ad26",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications' where REQUEST.PARAMETERS.QUERY contains the param 'read'",
+      "status": "passed",
+      "duration": 14,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?read=false\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706970034,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 951\nETag: W/\"3b7-LMaUp/MHz3LgkSa8rfunycdsvnk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.694Z\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.761Z\"\n    },\n    {\n        \"id\": 3,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.779Z\"\n    },\n    {\n        \"id\": 4,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.798Z\"\n    },\n    {\n        \"id\": 5,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.835Z\"\n    },\n    {\n        \"id\": 6,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.864Z\"\n    },\n    {\n        \"id\": 7,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.885Z\"\n    },\n    {\n        \"id\": 8,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.904Z\"\n    }\n]",
+            "time": 1781706970048
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "c4e8e824-e5d9-481a-a8b1-3d16d6bd9a32",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications' where REQUEST.PARAMETERS.QUERY contains the param 'userId'",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=911\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706970050,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706970059
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "cc7ff74c-ed36-41d0-9f54-2cb037551d98",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read'",
+      "status": "passed",
+      "duration": 17,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=758&read=false\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706970062,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706970080
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "846137f6-5dd8-4b90-b229-255ef745c6ef",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the param 'userId'",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=535\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706970084,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706970095
           }
         ],
         "reasons": [
@@ -195,10 +747,10 @@
       }
     },
     {
-      "id": "4caaaa36-6118-4886-9e0e-fba81ed44a1a",
-      "name": "Scenario: GET /notifications -> 200 with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the param 'userId'",
+      "id": "57fdc8f5-bc34-40d8-b0c3-1daad30c7ddf",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications_by_user'",
       "status": "passed",
-      "duration": 20,
+      "duration": 12,
       "suite": "contracts/notification-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -210,16 +762,106 @@
       "extra": {
         "valid": true,
         "wip": false,
-        "input": "GET /notifications?userId=380\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781706002613,
+        "input": "GET /notifications\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706970097,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:20:02 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
-            "time": 1781706002633
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 951\nETag: W/\"3b7-LMaUp/MHz3LgkSa8rfunycdsvnk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.694Z\"\n    },\n    {\n        \"id\": 2,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.761Z\"\n    },\n    {\n        \"id\": 3,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.779Z\"\n    },\n    {\n        \"id\": 4,\n        \"userId\": 1,\n        \"message\": \"Your task has been assigned\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:08.798Z\"\n    },\n    {\n        \"id\": 5,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"info\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.835Z\"\n    },\n    {\n        \"id\": 6,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"success\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.864Z\"\n    },\n    {\n        \"id\": 7,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"warning\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.885Z\"\n    },\n    {\n        \"id\": 8,\n        \"userId\": 756,\n        \"message\": \"aliquam\",\n        \"type\": \"error\",\n        \"read\": false,\n        \"createdAt\": \"2026-06-17T14:36:09.904Z\"\n    }\n]",
+            "time": 1781706970109
           }
         ],
         "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "e83cdf1c-7e7c-4148-a301-623e287e9382",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the param 'read'",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?read=true\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706970111,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706970121
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8147d3fd-bfe9-4c5c-a52d-d6685bacf883",
+      "name": "+ve  Scenario: GET /notifications -> 200 with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read'",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=535&read=false\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706970124,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706970132
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
           {
             "id": "T10001",
             "title": "Executed Using Example",
@@ -233,9 +875,9 @@
   ],
   "environment": {},
   "extra": {
-    "apiCoverage": "75%",
+    "apiCoverage": "100%",
     "actuatorEnabled": false,
-    "absoluteCoverage": "75%",
-    "specmaticConfigPath": "./specmatic.yaml"
+    "absoluteCoverage": "100%",
+    "specmaticConfigPath": "./specmatic.json"
   }
 }

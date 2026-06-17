@@ -3,8 +3,8 @@
     "name": "Specmatic v2.47.0"
   },
   "summary": {
-    "tests": 6,
-    "passed": 6,
+    "tests": 41,
+    "passed": 41,
     "failed": 0,
     "skipped": 0,
     "pending": 0,
@@ -12,10 +12,10 @@
   },
   "tests": [
     {
-      "id": "727524ad-3deb-4d4f-942e-22762f792ebd",
-      "name": "Scenario: POST /tasks -> 201 with the request from the example 'CREATE_TASK'",
+      "id": "d89b108f-d5da-4fbb-86e5-d45602e6c7c1",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'CREATE_TASK' where REQUEST.BODY contains all the keys",
       "status": "passed",
-      "duration": 89,
+      "duration": 74,
       "suite": "contracts/task-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -29,12 +29,12 @@
         "valid": true,
         "wip": false,
         "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"priority\": \"high\"\n}",
-        "inputTime": 1781705993623,
+        "inputTime": 1781706959509,
         "outputs": [
           {
             "title": "Response",
-            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 188\nETag: W/\"bc-jGsZoE9bvW4PLQ/TriEz6Acnghc\"\nDate: Wed, 17 Jun 2026 14:19:53 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 1,\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"status\": \"pending\",\n    \"priority\": \"high\",\n    \"createdAt\": \"2026-06-17T14:19:53.652Z\"\n}",
-            "time": 1781705993713
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 188\nETag: W/\"bc-t2oZ+Z5HBVYn25zuR9a0U0PQJiM\"\nDate: Wed, 17 Jun 2026 14:35:59 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 1,\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"status\": \"pending\",\n    \"priority\": \"high\",\n    \"createdAt\": \"2026-06-17T14:35:59.535Z\"\n}",
+            "time": 1781706959584
           }
         ],
         "reasons": [
@@ -49,10 +49,10 @@
       }
     },
     {
-      "id": "f6b5dae3-6c98-4f33-853f-2b13b99c55f0",
-      "name": "Scenario: POST /tasks -> 201 with the request from the example 'create_task_success'",
+      "id": "70a96f34-3d76-40e2-ae40-41480ffc7686",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'CREATE_TASK' where REQUEST.BODY contains all the keys AND the key priority is set to 'low' from enum",
       "status": "passed",
-      "duration": 41,
+      "duration": 19,
       "suite": "contracts/task-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -65,13 +65,185 @@
       "extra": {
         "valid": true,
         "wip": false,
-        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"This Side of Paradise\",\n    \"description\": \"We are committed to using the finest ingredients in our recipes. No food leaves our kitchen that we ourselves would not eat.\",\n    \"assigneeId\": 864,\n    \"priority\": \"high\"\n}",
-        "inputTime": 1781705995006,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"priority\": \"low\"\n}",
+        "inputTime": 1781706959604,
         "outputs": [
           {
             "title": "Response",
-            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 274\nETag: W/\"112-hUMJgVrqSGDd6ZnxkN5rIZ2IbnI\"\nDate: Wed, 17 Jun 2026 14:19:55 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 2,\n    \"title\": \"This Side of Paradise\",\n    \"description\": \"We are committed to using the finest ingredients in our recipes. No food leaves our kitchen that we ourselves would not eat.\",\n    \"assigneeId\": 864,\n    \"status\": \"pending\",\n    \"priority\": \"high\",\n    \"createdAt\": \"2026-06-17T14:19:55.020Z\"\n}",
-            "time": 1781705995047
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 187\nETag: W/\"bb-Rqi3eD9PsJL5PArF8spKKhEcj28\"\nDate: Wed, 17 Jun 2026 14:35:59 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 2,\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"status\": \"pending\",\n    \"priority\": \"low\",\n    \"createdAt\": \"2026-06-17T14:35:59.611Z\"\n}",
+            "time": 1781706959623
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "03fb25ed-8028-4b71-812a-a3266c29fa9b",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'CREATE_TASK' where REQUEST.BODY contains all the keys AND the key priority is set to 'medium' from enum",
+      "status": "passed",
+      "duration": 33,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"priority\": \"medium\"\n}",
+        "inputTime": 1781706959626,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 190\nETag: W/\"be-VzYpsDjlKU1v5+sgCdo0J7iG1xQ\"\nDate: Wed, 17 Jun 2026 14:35:59 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 3,\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"status\": \"pending\",\n    \"priority\": \"medium\",\n    \"createdAt\": \"2026-06-17T14:35:59.652Z\"\n}",
+            "time": 1781706959660
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "be6bf887-26d3-412f-823d-b999abf47474",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'CREATE_TASK' where REQUEST.BODY contains all the keys AND the key priority is set to 'critical' from enum",
+      "status": "passed",
+      "duration": 19,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"priority\": \"critical\"\n}",
+        "inputTime": 1781706959664,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 192\nETag: W/\"c0-t21EhkPuJ1+mcrys5FJbuR0M+ho\"\nDate: Wed, 17 Jun 2026 14:35:59 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 4,\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"status\": \"pending\",\n    \"priority\": \"critical\",\n    \"createdAt\": \"2026-06-17T14:35:59.676Z\"\n}",
+            "time": 1781706959683
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "388a3324-98a2-46b8-b807-9d812b919229",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'CREATE_TASK' where REQUEST.BODY contains only the mandatory keys",
+      "status": "passed",
+      "duration": 34,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1\n}",
+        "inputTime": 1781706959687,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 190\nETag: W/\"be-OohXUZ136kbD/izWMImmf2L2X3k\"\nDate: Wed, 17 Jun 2026 14:35:59 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 5,\n    \"title\": \"Implement login API\",\n    \"description\": \"Build the authentication endpoint with JWT\",\n    \"assigneeId\": 1,\n    \"status\": \"pending\",\n    \"priority\": \"medium\",\n    \"createdAt\": \"2026-06-17T14:35:59.709Z\"\n}",
+            "time": 1781706959722
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "a289d4bd-eda7-4946-8d84-42aaa828be3c",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'create_task_success' where REQUEST.BODY contains all the keys",
+      "status": "passed",
+      "duration": 47,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"priority\": \"high\"\n}",
+        "inputTime": 1781706960630,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 428\nETag: W/\"1ac-RL0Ul/tj6iS6IQtY/hWVf+OM6rs\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 6,\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"status\": \"pending\",\n    \"priority\": \"high\",\n    \"createdAt\": \"2026-06-17T14:36:00.649Z\"\n}",
+            "time": 1781706960678
           }
         ],
         "reasons": [
@@ -86,10 +258,182 @@
       }
     },
     {
-      "id": "0370daad-72dd-43fb-8d47-bcaed6fa5dde",
-      "name": "Scenario: POST /tasks -> 400 with the request from the example 'create_task_missing_fields'",
+      "id": "ec0bf165-1ba6-4469-8ba1-72d5bf0b9252",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'create_task_success' where REQUEST.BODY contains all the keys AND the key priority is set to 'low' from enum",
       "status": "passed",
-      "duration": 15,
+      "duration": 16,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"priority\": \"low\"\n}",
+        "inputTime": 1781706960680,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 427\nETag: W/\"1ab-CWg4tvOGIyQF9N3a4jkRBaGmreM\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 7,\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"status\": \"pending\",\n    \"priority\": \"low\",\n    \"createdAt\": \"2026-06-17T14:36:00.690Z\"\n}",
+            "time": 1781706960697
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "16dbdc56-69b8-4903-906c-82655f337817",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'create_task_success' where REQUEST.BODY contains all the keys AND the key priority is set to 'medium' from enum",
+      "status": "passed",
+      "duration": 11,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"priority\": \"medium\"\n}",
+        "inputTime": 1781706960700,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 430\nETag: W/\"1ae-RxrnKNN9GIC0Mh0xv40TnlqYSRc\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 8,\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"status\": \"pending\",\n    \"priority\": \"medium\",\n    \"createdAt\": \"2026-06-17T14:36:00.706Z\"\n}",
+            "time": 1781706960712
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8782925a-e85a-4287-b27a-ebe49261e105",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'create_task_success' where REQUEST.BODY contains all the keys AND the key priority is set to 'critical' from enum",
+      "status": "passed",
+      "duration": 16,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"priority\": \"critical\"\n}",
+        "inputTime": 1781706960714,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 432\nETag: W/\"1b0-BWmX14Ib8RfdbH79QlfHknfXNbQ\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 9,\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"status\": \"pending\",\n    \"priority\": \"critical\",\n    \"createdAt\": \"2026-06-17T14:36:00.720Z\"\n}",
+            "time": 1781706960730
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "e160574b-2fba-4a84-b4e0-1d6c29ca74bb",
+      "name": "+ve  Scenario: POST /tasks -> 201 with the request from the example 'create_task_success' where REQUEST.BODY contains only the mandatory keys",
+      "status": "passed",
+      "duration": 11,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:201"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 201\n\n{\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579\n}",
+        "inputTime": 1781706960733,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "201 Created\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 431\nETag: W/\"1af-EKtAN9XwyE+clIfejEBx34H5bFA\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"id\": 10,\n    \"title\": \"Little Hands Clapping\",\n    \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n    \"assigneeId\": 579,\n    \"status\": \"pending\",\n    \"priority\": \"medium\",\n    \"createdAt\": \"2026-06-17T14:36:00.739Z\"\n}",
+            "time": 1781706960745
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "67bd9b80-b419-4bf3-a9d6-140c63ad93eb",
+      "name": "+ve  Scenario: POST /tasks -> 400 with the request from the example 'create_task_missing_fields'",
+      "status": "passed",
+      "duration": 13,
       "suite": "contracts/task-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -102,13 +446,13 @@
       "extra": {
         "valid": true,
         "wip": false,
-        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"title\": \"MUTKU\"\n}",
-        "inputTime": 1781705995052,
+        "input": "POST /tasks\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"title\": \"KLFWP\"\n}",
+        "inputTime": 1781706960751,
         "outputs": [
           {
             "title": "Response",
-            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 71\nETag: W/\"47-xWjetZefl0kXQq0HWzQW1yBZ38o\"\nDate: Wed, 17 Jun 2026 14:19:55 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: description, assigneeId\",\n    \"code\": 400\n}",
-            "time": 1781705995068
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 71\nETag: W/\"47-xWjetZefl0kXQq0HWzQW1yBZ38o\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: description, assigneeId\",\n    \"code\": 400\n}",
+            "time": 1781706960764
           }
         ],
         "reasons": [
@@ -123,10 +467,10 @@
       }
     },
     {
-      "id": "16036951-31a3-4876-b179-e675d2354cb0",
-      "name": "Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST'",
+      "id": "ce029ca2-e6d5-4596-855c-36ab9591c15c",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST'",
       "status": "passed",
-      "duration": 28,
+      "duration": 14,
       "suite": "contracts/task-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -139,12 +483,12 @@
         "valid": true,
         "wip": false,
         "input": "GET /tasks\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781705995070,
+        "inputTime": 1781706960767,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 465\nETag: W/\"1d1-5W/Pcy6PnBkfGlvpg3SE1nUCqTU\"\nDate: Wed, 17 Jun 2026 14:19:55 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:19:53.652Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"This Side of Paradise\",\n        \"description\": \"We are committed to using the finest ingredients in our recipes. No food leaves our kitchen that we ourselves would not eat.\",\n        \"assigneeId\": 864,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:19:55.020Z\"\n    }\n]",
-            "time": 1781705995098
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 3106\nETag: W/\"c22-KbvBT0BfqBsUBylVMky91dvZOfM\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:35:59.535Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:35:59.611Z\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.652Z\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:35:59.676Z\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.709Z\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:36:00.649Z\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:36:00.690Z\"\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.706Z\"\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:36:00.720Z\"\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.739Z\"\n    }\n]",
+            "time": 1781706960781
           }
         ],
         "reasons": [
@@ -159,10 +503,10 @@
       }
     },
     {
-      "id": "92263e14-cd88-42a1-ae84-548234262ffb",
-      "name": "Scenario: GET /tasks -> 200 with the request from the example 'list_tasks'",
+      "id": "28f65177-9808-4e2b-a8eb-f4bb56eff753",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the param 'assigneeId'",
       "status": "passed",
-      "duration": 20,
+      "duration": 10,
       "suite": "contracts/task-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -174,16 +518,22 @@
       "extra": {
         "valid": true,
         "wip": false,
-        "input": "GET /tasks\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781705995101,
+        "input": "GET /tasks?assigneeId=595\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960785,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 465\nETag: W/\"1d1-5W/Pcy6PnBkfGlvpg3SE1nUCqTU\"\nDate: Wed, 17 Jun 2026 14:19:55 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:19:53.652Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"This Side of Paradise\",\n        \"description\": \"We are committed to using the finest ingredients in our recipes. No food leaves our kitchen that we ourselves would not eat.\",\n        \"assigneeId\": 864,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:19:55.020Z\"\n    }\n]",
-            "time": 1781705995122
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960795
           }
         ],
         "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
           {
             "id": "T10001",
             "title": "Executed Using Example",
@@ -195,10 +545,10 @@
       }
     },
     {
-      "id": "2b8418ed-602c-4e8c-a522-ad54c5427c90",
-      "name": "Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the param 'status'",
+      "id": "32d3cf63-e20d-4068-8624-aea721652dc8",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'pending' from enum",
       "status": "passed",
-      "duration": 27,
+      "duration": 10,
       "suite": "contracts/task-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -211,15 +561,1149 @@
         "valid": true,
         "wip": false,
         "input": "GET /tasks?status=pending\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781705995129,
+        "inputTime": 1781706960797,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 465\nETag: W/\"1d1-5W/Pcy6PnBkfGlvpg3SE1nUCqTU\"\nDate: Wed, 17 Jun 2026 14:19:55 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:19:53.652Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"This Side of Paradise\",\n        \"description\": \"We are committed to using the finest ingredients in our recipes. No food leaves our kitchen that we ourselves would not eat.\",\n        \"assigneeId\": 864,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:19:55.020Z\"\n    }\n]",
-            "time": 1781705995157
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 3106\nETag: W/\"c22-KbvBT0BfqBsUBylVMky91dvZOfM\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:35:59.535Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:35:59.611Z\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.652Z\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:35:59.676Z\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.709Z\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:36:00.649Z\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:36:00.690Z\"\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.706Z\"\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:36:00.720Z\"\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.739Z\"\n    }\n]",
+            "time": 1781706960808
           }
         ],
         "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "c08fe4cf-c5b2-4856-aec0-00ac86d72964",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'in_progress' from enum",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=in_progress\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960810,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960820
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "45fde28b-a530-4b37-97af-b725bdfe2fdb",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'completed' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=completed\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960823,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960829
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "f5c38838-d137-49fa-93d6-f0b4675aef17",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'cancelled' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=cancelled\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960831,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960837
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "34d1705f-1c07-4ba4-85a5-6463b7db5160",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'pending' from enum",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=pending&assigneeId=812\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960839,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960847
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "132d1392-c03f-4e6a-96b1-889ba2fa534e",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'in_progress' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=in_progress&assigneeId=736\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960848,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960855
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "c117b281-0175-46ee-bb58-036867b945e3",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'completed' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=completed&assigneeId=397\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960857,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960863
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "0865c310-3439-4ce9-9a54-f079704fab2e",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'TASKS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'cancelled' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=cancelled&assigneeId=971\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960864,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960871
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8a85ed1b-ca82-4eb2-9261-48bbb4e77f75",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks'",
+      "status": "passed",
+      "duration": 21,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960874,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 3106\nETag: W/\"c22-KbvBT0BfqBsUBylVMky91dvZOfM\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:35:59.535Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:35:59.611Z\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.652Z\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:35:59.676Z\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.709Z\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:36:00.649Z\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:36:00.690Z\"\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.706Z\"\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:36:00.720Z\"\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.739Z\"\n    }\n]",
+            "time": 1781706960895
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "7750e1a4-7222-43be-97a6-003f9fceefd1",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the param 'assigneeId'",
+      "status": "passed",
+      "duration": 14,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?assigneeId=853\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960898,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960912
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "eac4105b-6ec5-4512-a7dc-bb815c305f49",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'pending' from enum",
+      "status": "passed",
+      "duration": 16,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=pending\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960916,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 3106\nETag: W/\"c22-KbvBT0BfqBsUBylVMky91dvZOfM\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:35:59.535Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:35:59.611Z\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.652Z\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:35:59.676Z\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.709Z\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:36:00.649Z\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:36:00.690Z\"\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.706Z\"\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:36:00.720Z\"\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.739Z\"\n    }\n]",
+            "time": 1781706960932
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "29118b8b-909f-492e-93c8-f1f8471e9bea",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'in_progress' from enum",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=in_progress\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960935,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960945
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "a0450d8b-8e5c-47d6-9bcb-57915df57b36",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'completed' from enum",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=completed\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960947,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960955
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "60b63696-3829-453a-a1e4-da034348e13d",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'cancelled' from enum",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=cancelled\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960957,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960967
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "0a38ec94-ab68-43b2-b529-0a939b4b9c5f",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'pending' from enum",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=pending&assigneeId=359\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960969,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960978
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "be622bcf-272f-4957-8733-9b34bf2e4a3e",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'in_progress' from enum",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=in_progress&assigneeId=540\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960980,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706960990
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "08966938-7bed-4b83-bedd-437a3ea3ce7f",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'completed' from enum",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=completed&assigneeId=575\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706960993,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:00 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961003
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "9a474308-7a8f-4e54-a330-f4af4f9bf929",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'cancelled' from enum",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=cancelled&assigneeId=712\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961005,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961015
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "89f84346-60a9-4b70-bc21-88a5abdee579",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the param 'status'",
+      "status": "passed",
+      "duration": 14,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=pending\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961019,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 3106\nETag: W/\"c22-KbvBT0BfqBsUBylVMky91dvZOfM\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:35:59.535Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:35:59.611Z\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.652Z\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:35:59.676Z\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.709Z\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:36:00.649Z\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:36:00.690Z\"\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.706Z\"\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:36:00.720Z\"\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.739Z\"\n    }\n]",
+            "time": 1781706961033
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "620336c4-a743-499d-b55c-7399eabd777d",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'in_progress' from enum",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=in_progress\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961035,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961044
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "b17ed53a-2351-4140-a312-43a946f0c4f3",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'completed' from enum",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=completed\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961046,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961054
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "445daf49-d800-4609-a61a-97b2f4f73997",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the param 'status' AND status is set to 'cancelled' from enum",
+      "status": "passed",
+      "duration": 14,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=cancelled\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961056,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961071
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "bac76e19-628c-49b9-892a-66ba9f061c20",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status'",
+      "status": "passed",
+      "duration": 11,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961073,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 3106\nETag: W/\"c22-KbvBT0BfqBsUBylVMky91dvZOfM\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[\n    {\n        \"id\": 1,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:35:59.535Z\"\n    },\n    {\n        \"id\": 2,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:35:59.611Z\"\n    },\n    {\n        \"id\": 3,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.652Z\"\n    },\n    {\n        \"id\": 4,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:35:59.676Z\"\n    },\n    {\n        \"id\": 5,\n        \"title\": \"Implement login API\",\n        \"description\": \"Build the authentication endpoint with JWT\",\n        \"assigneeId\": 1,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:35:59.709Z\"\n    },\n    {\n        \"id\": 6,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"high\",\n        \"createdAt\": \"2026-06-17T14:36:00.649Z\"\n    },\n    {\n        \"id\": 7,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"low\",\n        \"createdAt\": \"2026-06-17T14:36:00.690Z\"\n    },\n    {\n        \"id\": 8,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.706Z\"\n    },\n    {\n        \"id\": 9,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"critical\",\n        \"createdAt\": \"2026-06-17T14:36:00.720Z\"\n    },\n    {\n        \"id\": 10,\n        \"title\": \"Little Hands Clapping\",\n        \"description\": \"We earn the loyalty of the people we serve by first anticipating, then fulfilling their needs with our superior-quality products, a unique shopping experience, customer-focused service and continuous innovation, while generating long-term profitable growth for our shareholders.\",\n        \"assigneeId\": 579,\n        \"status\": \"pending\",\n        \"priority\": \"medium\",\n        \"createdAt\": \"2026-06-17T14:36:00.739Z\"\n    }\n]",
+            "time": 1781706961085
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8ec60f73-5b41-4253-8626-f0f7e223b004",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the param 'assigneeId'",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?assigneeId=988\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961090,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961098
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "81cadcbf-a18b-47be-b098-cd3f8e496d2e",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId'",
+      "status": "passed",
+      "duration": 18,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=pending&assigneeId=327\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961102,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961121
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "7cbd9d7c-3b37-4a41-b62b-ae3f0ec2e795",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'in_progress' from enum",
+      "status": "passed",
+      "duration": 12,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=in_progress&assigneeId=384\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961124,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961136
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "cf072905-a199-487c-a33d-244420b70bdf",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'completed' from enum",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=completed&assigneeId=562\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961139,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961148
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "3f879c00-1079-4a5c-ba6c-d1806d3733cf",
+      "name": "+ve  Scenario: GET /tasks -> 200 with the request from the example 'list_tasks_by_status' where REQUEST.PARAMETERS.QUERY contains the params 'status', 'assigneeId' AND status is set to 'cancelled' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/task-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /tasks?status=cancelled&assigneeId=548\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706961150,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 2\nETag: W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\"\nDate: Wed, 17 Jun 2026 14:36:01 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n[]",
+            "time": 1781706961158
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
           {
             "id": "T10001",
             "title": "Executed Using Example",
@@ -233,9 +1717,9 @@
   ],
   "environment": {},
   "extra": {
-    "apiCoverage": "75%",
+    "apiCoverage": "100%",
     "actuatorEnabled": false,
-    "absoluteCoverage": "75%",
-    "specmaticConfigPath": "./specmatic.yaml"
+    "absoluteCoverage": "100%",
+    "specmaticConfigPath": "./specmatic.json"
   }
 }

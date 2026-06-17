@@ -3,19 +3,2598 @@
     "name": "Specmatic v2.47.0"
   },
   "summary": {
-    "tests": 0,
-    "passed": 0,
+    "tests": 70,
+    "passed": 70,
     "failed": 0,
     "skipped": 0,
     "pending": 0,
     "other": 0
   },
-  "tests": [],
+  "tests": [
+    {
+      "id": "57a31383-e5ba-497e-a429-8965e5812cea",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY has been omitted",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970144,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 60\nETag: W/\"3c-g4OwEfgmFDHItquUDDFwIEiyF0E\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Content-Type must be application/json\",\n    \"code\": 400\n}",
+            "time": 1781706970153
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8305771d-257a-4a1f-b7ec-7a2524c7eaf2",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970160,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970169
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "a57c2e28-9dbd-4c65-8906-475cb9d2b4e3",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": false,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970171,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970178
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "e0477492-6833-49f9-95fa-728a71329260",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"UCGPV\",\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970180,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970188
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "578f92af-75fe-444a-b067-e09195e89b59",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970194,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970204
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "2ab9ee6d-4d8b-4345-92c1-d0daaba0a9f9",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970206,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970213
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "839fd7e4-5873-4a21-968e-01070c54a7d7",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970215,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970221
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "ffdd0e90-f864-4753-8382-e40585842729",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": false,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970224,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970231
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "24f67492-d7a7-450a-b0da-7ea15ed967c3",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": false,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970234,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970241
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "d39268da-b765-46bc-a5d8-da897afba599",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": false,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970243,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970250
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8749871e-8ba8-4892-867d-e89a2efed370",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string",
+      "status": "passed",
+      "duration": 14,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"YLGVY\",\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970252,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970266
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "af61ade6-c91d-4bb0-b726-b43f2f15a933",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"LENIQ\",\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970270,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970278
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "1e148e41-df29-4906-83a4-79876c0565bd",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 12,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"ULLLP\",\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970281,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970293
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "42bb0443-6501-4902-a545-ce773ee40173",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null",
+      "status": "passed",
+      "duration": 12,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": null,\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970295,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970307
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "0013839f-2dda-4d19-b34a-f5d0aad7af6d",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 12,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": 363,\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970311,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970324
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "d14527f1-aecd-4d6e-aa18-c76d4a3dac0c",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 14,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": false,\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970328,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970342
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "466a4621-fd51-49e9-a4c2-4188c91a3a98",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 12,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": null,\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970345,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970357
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "f9e0b310-325c-4daa-8b02-85fe7da7db64",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": null,\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970360,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970369
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "f43a8a5c-48f5-4ced-b0db-5e9c0c7a464c",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": null,\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970371,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970378
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "b0a1fb4b-041a-4438-a4c7-6d44fb4c5540",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": 957,\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970381,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970387
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "b702acbc-bdfb-441e-8b12-82e0a8fac9fd",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": 726,\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970390,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970396
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "aac114a2-d83c-4318-b6f2-ca42820f2ce9",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": 334,\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970399,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970405
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "967b3023-8745-4c9d-a513-9307ee5c9867",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": false,\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970407,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970412
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "566bc417-e772-4b56-859f-e4c69284c366",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": false,\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970414,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970420
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "d3ae431a-e1a5-424d-93da-dce3a2cf1fe4",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": true,\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970422,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970428
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "96fea34d-b1d6-4599-b54a-b82706520357",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to \"info_\"",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": \"info_\"\n}",
+        "inputTime": 1781706970432,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 82\nETag: W/\"52-e1pmh3d13DIVAPGuCw2jV9mdrmQ\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Invalid type. Must be one of: info, success, warning, error\",\n    \"code\": 400\n}",
+            "time": 1781706970438
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "5c1e9e74-b652-4805-b900-5c16dec68788",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to null",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": null\n}",
+        "inputTime": 1781706970441,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 52\nETag: W/\"34-o4EpjAiW9d+rLX83MPQReM72DtQ\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: type\",\n    \"code\": 400\n}",
+            "time": 1781706970447
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "71ddff84-f0e7-43e9-92a8-bcd5d1ea2f9e",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to number",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": 330\n}",
+        "inputTime": 1781706970450,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-bYfMfeQK550llnvRjlkfOYvKxh8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"type\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970457
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "d99ad489-28a7-4710-a30b-867c34d040e2",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'CREATE_NOTIFICATION' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to boolean",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 1,\n    \"message\": \"Your task has been assigned\",\n    \"type\": false\n}",
+        "inputTime": 1781706970459,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-bYfMfeQK550llnvRjlkfOYvKxh8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"type\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970467
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "a9f878f9-a959-4c89-9722-ea71640c26cd",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY has been omitted",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970474,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 60\nETag: W/\"3c-g4OwEfgmFDHItquUDDFwIEiyF0E\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Content-Type must be application/json\",\n    \"code\": 400\n}",
+            "time": 1781706970482
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "cabf76cb-b0d6-48cb-995a-b1d8033991ad",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"praesentium\",\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970484,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970490
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "350b55d3-9c6e-4736-b60b-2d63ed3e89dc",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": true,\n    \"message\": \"praesentium\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970493,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970501
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "7a06d552-6239-409f-9780-6cd9e929b2b5",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"ANYRG\",\n    \"message\": \"praesentium\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970503,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970509
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "df677fba-71ad-4680-9ca4-55b314bf71d7",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"praesentium\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970511,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970518
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "ee42157c-c9d9-415a-84a5-4484b1dd5cc3",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"praesentium\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970520,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970526
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "5f2b6f91-00c8-4dff-8f26-e4c3adbaf453",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to null AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": null,\n    \"message\": \"praesentium\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970528,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-0C3gNbPMr1pEYwv6m37ALPxXcn8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: userId\",\n    \"code\": 400\n}",
+            "time": 1781706970534
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "ea633d1a-e3b0-4243-8a0d-5e033a995d69",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": true,\n    \"message\": \"praesentium\",\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970536,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970541
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "94937ec5-4b72-41fa-964d-72bc08c73ca8",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": true,\n    \"message\": \"praesentium\",\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970543,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970549
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "ad1d2a0a-a8bb-4330-b377-95cbafc5136a",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to boolean AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": true,\n    \"message\": \"praesentium\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970551,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970557
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "f17c7e57-464b-4f13-b8a9-0e1eaec4b2b7",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"MSMCQ\",\n    \"message\": \"praesentium\",\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970560,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970566
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "71467dee-f605-47e5-be86-0d1c520e81fc",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"QTEGC\",\n    \"message\": \"praesentium\",\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970568,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970575
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "adc55d55-943f-4d97-93e4-07b73a3788dc",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key userId is mutated from number to string AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": \"AQPWE\",\n    \"message\": \"praesentium\",\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970577,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 58\nETag: W/\"3a-Bimc4cLllme2Ec1WJ74/7O7ANxM\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970587
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "7174dacf-0132-4d49-88ce-e4d9e78c67b7",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null",
+      "status": "passed",
+      "duration": 14,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": null,\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970589,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970604
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "dbd74eec-3568-4ef8-957d-963ab5fafffa",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": 317,\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970606,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970613
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "79205eba-0819-4ab6-82bd-29135cd9f27c",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": false,\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970616,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970626
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "5375f82e-67e4-490f-a808-53e1ca22d385",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": null,\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970628,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970638
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "d9b5f188-903e-42ed-ad01-887d74d8ea5b",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": null,\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970641,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970650
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "b8e4595b-1d87-4a56-b73a-7c0251f08ead",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to null AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": null,\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970652,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 55\nETag: W/\"37-Vk8F3bJjtZwKmq8af+GR0Y6RK6M\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: message\",\n    \"code\": 400\n}",
+            "time": 1781706970658
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "62bca840-1606-48dd-a2c1-5df4a303ab44",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number",
+      "status": "passed",
+      "duration": 10,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": 789,\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970660,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970671
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "ec9a2347-31e1-4ec8-8f95-24efc7192b13",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number AND type is set to 'warning' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": 642,\n    \"type\": \"warning\"\n}",
+        "inputTime": 1781706970673,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970679
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "8ffe4d69-4d7f-478d-af6a-895675f15a1b",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to number AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": 105,\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970681,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970689
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "a613fe54-f689-464a-8bad-12476a14a3c5",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": false,\n    \"type\": \"info\"\n}",
+        "inputTime": 1781706970690,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970697
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "48360fc2-ce6c-40b5-84e2-f47b658e95ed",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean AND type is set to 'success' from enum",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": true,\n    \"type\": \"success\"\n}",
+        "inputTime": 1781706970700,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970708
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "83991fa5-5d61-4ebc-aeee-683cb2713236",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key message is mutated from string to boolean AND type is set to 'error' from enum",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": true,\n    \"type\": \"error\"\n}",
+        "inputTime": 1781706970709,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 57\nETag: W/\"39-zjwhuQRpN7jZp6FA7U/qCiJt4uk\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"message\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970716
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "d8b3d2b1-d3bb-480d-b7ed-245ca9cf9b3c",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to \"info_\"",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": \"praesentium\",\n    \"type\": \"info_\"\n}",
+        "inputTime": 1781706970718,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 82\nETag: W/\"52-e1pmh3d13DIVAPGuCw2jV9mdrmQ\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Invalid type. Must be one of: info, success, warning, error\",\n    \"code\": 400\n}",
+            "time": 1781706970727
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "b26b68a3-19f9-4c69-80cb-8bc72bdc4d6b",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to null",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": \"praesentium\",\n    \"type\": null\n}",
+        "inputTime": 1781706970731,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 52\nETag: W/\"34-o4EpjAiW9d+rLX83MPQReM72DtQ\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Missing required fields: type\",\n    \"code\": 400\n}",
+            "time": 1781706970741
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "908ff806-f81d-4dc8-a882-80790a7fa684",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to number",
+      "status": "passed",
+      "duration": 6,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": \"praesentium\",\n    \"type\": 132\n}",
+        "inputTime": 1781706970744,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-bYfMfeQK550llnvRjlkfOYvKxh8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"type\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970751
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "69fef443-3fe3-49d3-af12-18b8bf145c7d",
+      "name": "-ve  Scenario: POST /notifications -> 4xx with the request from the example 'create_notification_success' where REQUEST.BODY contains all the keys AND the key type is mutated from (\"info\" or \"success\" or \"warning\" or \"error\") to boolean",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "content-type:application/json",
+        "method:post",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "POST /notifications\nContent-Type: application/json\nSpecmatic-Response-Code: 400\n\n{\n    \"userId\": 588,\n    \"message\": \"praesentium\",\n    \"type\": true\n}",
+        "inputTime": 1781706970753,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 54\nETag: W/\"36-bYfMfeQK550llnvRjlkfOYvKxh8\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Field \\\"type\\\" must be a string\",\n    \"code\": 400\n}",
+            "time": 1781706970760
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "af238566-c816-4642-89f0-a74e9d1e01e3",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'NOTIFICATIONS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND userId is mutated from number to boolean",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=false&read=true\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970765,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 68\nETag: W/\"44-89OcxBmt87FmRdt85hFYvB/SCsg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970773
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "48614596-03f7-43cb-b2ae-c4e1a5ad16f7",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'NOTIFICATIONS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND userId is mutated from number to string",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=UFSPD&read=true\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970775,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 68\nETag: W/\"44-89OcxBmt87FmRdt85hFYvB/SCsg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970783
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "390c1175-1ace-41de-8d56-e9169579314a",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'NOTIFICATIONS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND read is mutated from boolean to string",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=603&read=TDSNI\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970785,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 78\nETag: W/\"4e-zVqAAGc0bQmfGEcYjBnkn126zBg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"read\\\" must be a boolean (true/false)\",\n    \"code\": 400\n}",
+            "time": 1781706970791
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "d380e3c8-7c0e-4d2d-9bb4-169c1231dc5e",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'NOTIFICATIONS_LIST' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND read is mutated from boolean to number",
+      "status": "passed",
+      "duration": 11,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=166&read=649\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970793,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 78\nETag: W/\"4e-zVqAAGc0bQmfGEcYjBnkn126zBg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"read\\\" must be a boolean (true/false)\",\n    \"code\": 400\n}",
+            "time": 1781706970804
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "dd99436a-1e54-48ce-94f9-1bf60de9e50d",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND userId is mutated from number to boolean",
+      "status": "passed",
+      "duration": 9,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=false&read=true\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970810,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 68\nETag: W/\"44-89OcxBmt87FmRdt85hFYvB/SCsg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970819
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "4d022432-62b8-43a3-b8d3-73c3409f9574",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND userId is mutated from number to string",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=TETSK&read=false\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970822,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 68\nETag: W/\"44-89OcxBmt87FmRdt85hFYvB/SCsg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970830
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "f065d346-e4f2-457b-8afd-42bf8f7eeaa0",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND read is mutated from boolean to string",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=902&read=AMIHL\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970832,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 78\nETag: W/\"4e-zVqAAGc0bQmfGEcYjBnkn126zBg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"read\\\" must be a boolean (true/false)\",\n    \"code\": 400\n}",
+            "time": 1781706970838
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "abb1a411-ceb6-4519-9530-b8d14e47f32e",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND read is mutated from boolean to number",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=856&read=748\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970840,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 78\nETag: W/\"4e-zVqAAGc0bQmfGEcYjBnkn126zBg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"read\\\" must be a boolean (true/false)\",\n    \"code\": 400\n}",
+            "time": 1781706970845
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "f884ccd6-6d6d-412b-a77a-0bb65fbe05cf",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND userId is mutated from number to boolean",
+      "status": "passed",
+      "duration": 5,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=true&read=true\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970850,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 68\nETag: W/\"44-89OcxBmt87FmRdt85hFYvB/SCsg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970855
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "45e67249-61a7-42a0-a4b0-7280f3a1c4f8",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND userId is mutated from number to string",
+      "status": "passed",
+      "duration": 8,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=VROBE&read=true\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970857,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 68\nETag: W/\"44-89OcxBmt87FmRdt85hFYvB/SCsg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"userId\\\" must be an integer\",\n    \"code\": 400\n}",
+            "time": 1781706970865
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "7823947b-9bba-4b0e-b6a3-df7b1bb6b819",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND read is mutated from boolean to string",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=103&read=OBKMO\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970867,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 78\nETag: W/\"4e-zVqAAGc0bQmfGEcYjBnkn126zBg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"read\\\" must be a boolean (true/false)\",\n    \"code\": 400\n}",
+            "time": 1781706970874
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "b2fd4675-b341-444e-bf02-22b67682b54e",
+      "name": "-ve  Scenario: GET /notifications -> 4xx with the request from the example 'list_notifications_by_user' where REQUEST.PARAMETERS.QUERY contains the params 'userId', 'read' AND read is mutated from boolean to number",
+      "status": "passed",
+      "duration": 7,
+      "suite": "contracts/notification-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:400"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /notifications?userId=103&read=226\nSpecmatic-Response-Code: 400\n\n",
+        "inputTime": 1781706970876,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "400 Bad Request\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 78\nETag: W/\"4e-zVqAAGc0bQmfGEcYjBnkn126zBg\"\nDate: Wed, 17 Jun 2026 14:36:10 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"error\": \"Query parameter \\\"read\\\" must be a boolean (true/false)\",\n    \"code\": 400\n}",
+            "time": 1781706970883
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10004",
+            "title": "Executed Using Negative Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10004",
+            "summary": "This operation was executed by generating -ve payloads, due to negative generation being enabled"
+          }
+        ],
+        "qualifiers": []
+      }
+    }
+  ],
   "environment": {},
   "extra": {
-    "apiCoverage": "75%",
+    "apiCoverage": "100%",
     "actuatorEnabled": false,
-    "absoluteCoverage": "75%",
-    "specmaticConfigPath": "./specmatic.yaml"
+    "absoluteCoverage": "100%",
+    "specmaticConfigPath": "./specmatic.json"
   }
 }

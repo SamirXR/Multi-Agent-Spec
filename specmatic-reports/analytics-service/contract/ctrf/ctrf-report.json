@@ -3,8 +3,8 @@
     "name": "Specmatic v2.47.0"
   },
   "summary": {
-    "tests": 3,
-    "passed": 3,
+    "tests": 12,
+    "passed": 12,
     "failed": 0,
     "skipped": 0,
     "pending": 0,
@@ -12,10 +12,10 @@
   },
   "tests": [
     {
-      "id": "2d65f94d-93ee-42ba-b7f0-24d3ccc0bc9d",
-      "name": "Scenario: GET /analytics -> 200 with the request from the example 'ANALYTICS_DATA'",
+      "id": "30b52e71-d83d-4e19-ac7e-2a95ded74fa5",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'ANALYTICS_DATA'",
       "status": "passed",
-      "duration": 154,
+      "duration": 162,
       "suite": "contracts/analytics-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -28,12 +28,12 @@
         "valid": true,
         "wip": false,
         "input": "GET /analytics\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781706009115,
+        "inputTime": 1781706977092,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-O3JZ3tfjy10/7iM/V0j9qcKgx4E\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.212Z\"\n}",
-            "time": 1781706009270
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-77PVbYI5YrBpqESuQKnQ8o65BvU\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.175Z\"\n}",
+            "time": 1781706977254
           }
         ],
         "reasons": [
@@ -48,10 +48,136 @@
       }
     },
     {
-      "id": "1478f958-7f19-4d44-ac85-cdb760ac1d42",
-      "name": "Scenario: GET /analytics -> 200 with the request from the example 'get_analytics'",
+      "id": "08dbca44-4201-4250-ac86-e5fd7139fdfc",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'ANALYTICS_DATA' where REQUEST.PARAMETERS.QUERY contains the param 'to'",
       "status": "passed",
-      "duration": 91,
+      "duration": 30,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?to=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977290,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-mPHTzYj4TNEb/eVMlcve+bYX59o\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.313Z\"\n}",
+            "time": 1781706977321
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "1f72bf32-96b3-49c0-acc7-dea113076e84",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'ANALYTICS_DATA' where REQUEST.PARAMETERS.QUERY contains the param 'from'",
+      "status": "passed",
+      "duration": 31,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?from=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977326,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-pN+R9S5WcSByNYbHq4tfMa/uDyc\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.351Z\"\n}",
+            "time": 1781706977358
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "44f3255e-f5be-41b5-9fa7-95991a72cc9c",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'ANALYTICS_DATA' where REQUEST.PARAMETERS.QUERY contains the params 'from', 'to'",
+      "status": "passed",
+      "duration": 21,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?from=2026-06-17T14:36:17Z&to=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977360,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-LiqxThvh++zFOv1OnM3341eqxkQ\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.376Z\"\n}",
+            "time": 1781706977382
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "7bc076d1-d98b-4e90-92c2-711d043c0917",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics'",
+      "status": "passed",
+      "duration": 50,
       "suite": "contracts/analytics-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -64,12 +190,180 @@
         "valid": true,
         "wip": false,
         "input": "GET /analytics\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781706009298,
+        "inputTime": 1781706977389,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-y6ECCvNl2Yoh4LOvghP+Z4wCSrc\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.329Z\"\n}",
-            "time": 1781706009390
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-o5CkTlPvfVq5/+5TRKH8d0gpCco\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.410Z\"\n}",
+            "time": 1781706977439
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "52b27888-ba2d-429b-9791-4f190ec8b4f7",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics' where REQUEST.PARAMETERS.QUERY contains the param 'to'",
+      "status": "passed",
+      "duration": 30,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?to=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977442,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-5CPmlEALHW+aKQkPfifJZpt4kBQ\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.462Z\"\n}",
+            "time": 1781706977472
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "b3c9ee66-aff3-4755-a91e-dc22b5db8533",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics' where REQUEST.PARAMETERS.QUERY contains the param 'from'",
+      "status": "passed",
+      "duration": 31,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?from=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977477,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-xZ8woVj10pRoBUkdrQEeNgANT0E\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.492Z\"\n}",
+            "time": 1781706977508
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "386f5218-115f-4a5f-9540-d3ba3f9afff1",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics' where REQUEST.PARAMETERS.QUERY contains the params 'from', 'to'",
+      "status": "passed",
+      "duration": 32,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?from=2026-06-17T14:36:17Z&to=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977511,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-ywq8eGRx14Fdkjx7g6SmBigkI5Q\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.525Z\"\n}",
+            "time": 1781706977544
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "844b5cbb-5c39-4b9a-a01a-a101f0c71cfc",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics_with_date_range' where REQUEST.PARAMETERS.QUERY contains the params 'from', 'to'",
+      "status": "passed",
+      "duration": 24,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?from=2026-06-17T14:36:17Z&to=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977562,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-EniXCg+MnwgKpdDIhxZDyiT/7CQ\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.572Z\"\n}",
+            "time": 1781706977586
           }
         ],
         "reasons": [
@@ -84,10 +378,10 @@
       }
     },
     {
-      "id": "2d2fa8e2-fe19-460b-a918-5c774723010c",
-      "name": "Scenario: GET /analytics -> 200 with the request from the example 'get_analytics_with_date_range' where REQUEST.PARAMETERS.QUERY contains the params 'from', 'to'",
+      "id": "4fa5c925-57ed-4d46-9dc9-ed40ddcb3a88",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics_with_date_range'",
       "status": "passed",
-      "duration": 40,
+      "duration": 27,
       "suite": "contracts/analytics-service.yaml",
       "message": "",
       "rawStatus": "Success",
@@ -99,16 +393,106 @@
       "extra": {
         "valid": true,
         "wip": false,
-        "input": "GET /analytics?from=2026-06-17T14:20:09Z&to=2026-06-17T14:20:09Z\nSpecmatic-Response-Code: 200\n\n",
-        "inputTime": 1781706009429,
+        "input": "GET /analytics\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977590,
         "outputs": [
           {
             "title": "Response",
-            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-5Siqbnoy6laEWCJkwm0/vHeICrM\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.449Z\"\n}",
-            "time": 1781706009469
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-Qbji0FghUVBPARLVpP+sCYcNoFk\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.600Z\"\n}",
+            "time": 1781706977617
           }
         ],
         "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "37166331-7ec9-4a7a-95b1-d47e62bdf00a",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics_with_date_range' where REQUEST.PARAMETERS.QUERY contains the param 'to'",
+      "status": "passed",
+      "duration": 30,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?to=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977624,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-2YM9ggGdHoKvGKQab/KGuMwtJqI\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.638Z\"\n}",
+            "time": 1781706977654
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "45d6e27c-0624-4f9d-9a10-dc60c41dadcd",
+      "name": "+ve  Scenario: GET /analytics -> 200 with the request from the example 'get_analytics_with_date_range' where REQUEST.PARAMETERS.QUERY contains the param 'from'",
+      "status": "passed",
+      "duration": 28,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?from=2026-06-17T14:36:17Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706977659,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 272\nETag: W/\"110-HIzwxeediRGiVy5o9jLpiTgj7/c\"\nDate: Wed, 17 Jun 2026 14:36:17 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 12,\n    \"totalTasks\": 10,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 8,\n    \"tasksByPriority\": {\n        \"low\": 2,\n        \"medium\": 4,\n        \"high\": 2,\n        \"critical\": 2\n    },\n    \"tasksByStatus\": {\n        \"pending\": 10,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:36:17.675Z\"\n}",
+            "time": 1781706977687
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10003",
+            "title": "Executed Using Positive Generation",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10003",
+            "summary": "This operation was executed by generating +ve payloads, due to positive generation being enabled"
+          },
           {
             "id": "T10001",
             "title": "Executed Using Example",
@@ -122,9 +506,9 @@
   ],
   "environment": {},
   "extra": {
-    "apiCoverage": "50%",
+    "apiCoverage": "100%",
     "actuatorEnabled": false,
-    "absoluteCoverage": "50%",
-    "specmaticConfigPath": "./specmatic.yaml"
+    "absoluteCoverage": "100%",
+    "specmaticConfigPath": "./specmatic.json"
   }
 }
