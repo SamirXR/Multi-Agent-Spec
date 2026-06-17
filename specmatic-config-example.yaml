@@ -9,7 +9,10 @@
 #
 # To USE this config with `specmatic test` (no extra args), rename it to specmatic.yaml.
 # To use v2-style CLI (recommended for CI), keep this name and use:
-#   specmatic test contracts/X.yaml --testBaseURL=http://localhost:PORT --resiliency
+#   docker run --rm -v "$(pwd):/usr/src/app" --network host specmatic/enterprise \
+#     test contracts/X.yaml --testBaseURL=http://localhost:PORT
+# The Enterprise Docker image automatically runs resiliency tests when a valid
+# license is present. No --resiliency flag is needed or supported.
 #
 version: 3
 

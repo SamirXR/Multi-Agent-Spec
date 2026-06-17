@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: write
+
 env:
   USER_SERVICE_PORT: 3001
   TASK_SERVICE_PORT: 3002
@@ -30,7 +33,7 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Setup Java (required for Specmatic)
+      - name: Setup Java (required for Specmatic OSS CLI)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
@@ -38,18 +41,6 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-
-      - name: Save Specmatic Enterprise license
-        env:
-          SPECMATIC_LICENSE: ${{ secrets.SPECMATIC_LICENSE }}
-        run: |
-          mkdir -p ~/.specmatic
-          if [ -n "$SPECMATIC_LICENSE" ]; then
-            echo "$SPECMATIC_LICENSE" > ~/.specmatic/specmatic-license.txt
-            echo "Enterprise license installed."
-          else
-            echo "No SPECMATIC_LICENSE secret — running in OSS mode."
-          fi
 
       - name: Validate OpenAPI contracts (Redocly lint)
         run: |
@@ -67,8 +58,16 @@ jobs:
 
   # ─────────────────────────────────────────────────────────────────────────────
   # Job 2: Start microservices and run Specmatic contract + resiliency tests
+  #
   # Uses specmatic/enterprise Docker image per Specmatic CI docs:
   #   https://docs.specmatic.io/references/continuous_integration
+  #
+  # The Enterprise image automatically runs BOTH contract tests AND resiliency
+  # tests (schema-based negative tests) when a valid license is present.
+  # No --resiliency CLI flag is needed or supported.
+  #
+  # Reports are saved per-service under specmatic-reports/ and committed
+  # back to the repository so they are available for review.
   # ─────────────────────────────────────────────────────────────────────────────
   contract-tests:
     name: Run Specmatic Contract & Resiliency Tests
@@ -88,6 +87,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      # Write the Enterprise license so the Docker container can pick it up
       - name: Save Specmatic Enterprise license
         env:
           SPECMATIC_LICENSE: ${{ secrets.SPECMATIC_LICENSE }}
@@ -97,9 +97,11 @@ jobs:
             echo "$SPECMATIC_LICENSE" > ~/.specmatic/specmatic-license.txt
             echo "Enterprise license installed."
           else
-            echo "No SPECMATIC_LICENSE secret — running in OSS mode (resiliency tests will be skipped)."
+            echo "WARNING: No SPECMATIC_LICENSE secret found."
+            echo "Resiliency tests require a Specmatic Enterprise license."
           fi
 
+      # ── Start microservices ─────────────────────────────────────────────────
       - name: Start all microservices
         run: |
           npm run start:user-service &
@@ -113,7 +115,8 @@ jobs:
       - name: Wait for all services to be healthy
         run: |
           echo "Waiting for services to start..."
-          for port in ${{ env.USER_SERVICE_PORT }} ${{ env.TASK_SERVICE_PORT }} ${{ env.NOTIFICATION_SERVICE_PORT }} ${{ env.ANALYTICS_SERVICE_PORT }}; do
+          for port in ${{ env.USER_SERVICE_PORT }} ${{ env.TASK_SERVICE_PORT }} \
+                      ${{ env.NOTIFICATION_SERVICE_PORT }} ${{ env.ANALYTICS_SERVICE_PORT }}; do
             echo "  Checking port $port..."
             for i in $(seq 1 60); do
               if curl -sf http://localhost:$port/health > /dev/null 2>&1; then
@@ -122,7 +125,6 @@ jobs:
               fi
               if [ $i -eq 60 ]; then
                 echo "  ERROR: Service on port $port failed to start after 60 seconds"
-                curl -v http://localhost:$port/health 2>&1 || true
                 exit 1
               fi
               sleep 1
@@ -130,134 +132,179 @@ jobs:
           done
           echo "All services are ready!"
 
-      # --- User Service ---
-      - name: Run Specmatic contract tests — User Service
+      # ── Pull Enterprise image once ──────────────────────────────────────────
+      - name: Pull Specmatic Enterprise Docker image
+        run: docker pull specmatic/enterprise
+
+      # ── Run tests per service ────────────────────────────────────────────────
+      # Each service runs in its own Docker container.
+      # Reports are mounted to a service-specific directory so they don't overwrite
+      # each other.  The Enterprise image generates:
+      #   - JUnit XML: build/reports/specmatic/test/junit/
+      #   - CTRF JSON: build/reports/specmatic/test/ctrf/
+      #   - HTML:      build/reports/specmatic/test/html/
+      # Inside the container these are at /usr/src/app/build/reports/specmatic/,
+      # which we map to specmatic-reports/<service>/ on the host.
+
+      - name: Run tests — User Service (contract + resiliency)
         run: |
-          mkdir -p reports/user-service/contract reports/user-service/resiliency
+          mkdir -p specmatic-reports/user-service
           docker run --rm \
-            -v "$(pwd):/usr/src/app" \
+            -v "$(pwd)/contracts:/usr/src/app/contracts" \
+            -v "$(pwd)/specmatic-reports/user-service:/usr/src/app/build/reports/specmatic" \
             -v "$HOME/.specmatic:/root/.specmatic:ro" \
             -w /usr/src/app \
             --network host \
             specmatic/enterprise \
             test contracts/user-service.yaml \
-            --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }} \
-            --junitReportDir=reports/user-service/contract
+            --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }}
 
-      # --- Task Service ---
-      - name: Run Specmatic contract tests — Task Service
+      - name: Run tests — Task Service (contract + resiliency)
         run: |
-          mkdir -p reports/task-service/contract reports/task-service/resiliency
+          mkdir -p specmatic-reports/task-service
           docker run --rm \
-            -v "$(pwd):/usr/src/app" \
+            -v "$(pwd)/contracts:/usr/src/app/contracts" \
+            -v "$(pwd)/specmatic-reports/task-service:/usr/src/app/build/reports/specmatic" \
             -v "$HOME/.specmatic:/root/.specmatic:ro" \
             -w /usr/src/app \
             --network host \
             specmatic/enterprise \
             test contracts/task-service.yaml \
-            --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }} \
-            --junitReportDir=reports/task-service/contract
+            --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }}
 
-      # --- Notification Service ---
-      - name: Run Specmatic contract tests — Notification Service
+      - name: Run tests — Notification Service (contract + resiliency)
         run: |
-          mkdir -p reports/notification-service/contract reports/notification-service/resiliency
+          mkdir -p specmatic-reports/notification-service
           docker run --rm \
-            -v "$(pwd):/usr/src/app" \
+            -v "$(pwd)/contracts:/usr/src/app/contracts" \
+            -v "$(pwd)/specmatic-reports/notification-service:/usr/src/app/build/reports/specmatic" \
             -v "$HOME/.specmatic:/root/.specmatic:ro" \
             -w /usr/src/app \
             --network host \
             specmatic/enterprise \
             test contracts/notification-service.yaml \
-            --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }} \
-            --junitReportDir=reports/notification-service/contract
+            --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }}
 
-      # --- Analytics Service ---
-      - name: Run Specmatic contract tests — Analytics Service
+      - name: Run tests — Analytics Service (contract + resiliency)
         run: |
-          mkdir -p reports/analytics-service/contract reports/analytics-service/resiliency
+          mkdir -p specmatic-reports/analytics-service
           docker run --rm \
-            -v "$(pwd):/usr/src/app" \
+            -v "$(pwd)/contracts:/usr/src/app/contracts" \
+            -v "$(pwd)/specmatic-reports/analytics-service:/usr/src/app/build/reports/specmatic" \
             -v "$HOME/.specmatic:/root/.specmatic:ro" \
             -w /usr/src/app \
             --network host \
             specmatic/enterprise \
             test contracts/analytics-service.yaml \
-            --testBaseURL=http://localhost:${{ env.ANALYTICS_SERVICE_PORT }} \
-            --junitReportDir=reports/analytics-service/contract
+            --testBaseURL=http://localhost:${{ env.ANALYTICS_SERVICE_PORT }}
 
-      # --- Split CTRF reports into contract vs resiliency ---
-      - name: Separate contract and resiliency CTRF reports
+      # ── Split CTRF reports into contract vs resiliency ─────────────────────
+      - name: Split CTRF reports into contract and resiliency
         if: always()
         run: |
-          pip install jsonpath-ng 2>/dev/null || true
           python3 << 'PYEOF'
-          import json, os, glob
+          import json, os, glob, shutil
 
           for svc in ["user-service", "task-service", "notification-service", "analytics-service"]:
-            ctrf_dir = f"build/reports/specmatic/test/ctrf"
-            for ctrf_file in glob.glob(f"{ctrf_dir}/*.json"):
-              try:
-                with open(ctrf_file) as f:
-                  report = json.load(f)
-              except:
-                continue
+              ctrf_dir = f"specmatic-reports/{svc}/test/ctrf"
+              ctrf_files = glob.glob(f"{ctrf_dir}/*.json")
+              if not ctrf_files:
+                  print(f"{svc}: No CTRF report found at {ctrf_dir}")
+                  # Print directory tree for debugging
+                  base = f"specmatic-reports/{svc}"
+                  for root, dirs, files in os.walk(base):
+                      level = root.replace(base, "").count(os.sep)
+                      indent = "  " * level
+                      print(f"{indent}{os.path.basename(root)}/")
+                      sub_indent = "  " * (level + 1)
+                      for f in files:
+                          print(f"{sub_indent}{f}")
+                  continue
 
-              contract_tests = []
-              resiliency_tests = []
+              for ctrf_file in ctrf_files:
+                  try:
+                      with open(ctrf_file) as f:
+                          report = json.load(f)
+                  except Exception as e:
+                      print(f"{svc}: Failed to read CTRF: {e}")
+                      continue
 
-              for test in report.get("tests", []):
-                name = test.get("name", "")
-                # Resiliency tests are generative negative tests
-                # They typically involve type mutations, null values, missing fields
-                # and their names don't come from user-defined examples
-                tags = test.get("tags", [])
-                is_resiliency = any("resiliency" in str(t).lower() for t in tags)
+                  all_tests = report.get("tests", [])
+                  contract_tests = []
+                  resiliency_tests = []
 
-                # Heuristic: tests with example names (from _examples/ dir or inline)
-                # are contract tests; auto-generated negative tests are resiliency
-                example_keywords = ["create_user_success", "list_users", "get_user_by_id",
-                                    "get_user_not_found", "create_user_missing_fields",
-                                    "create_task_success", "list_tasks", "list_tasks_by_status",
-                                    "create_task_missing_fields", "create_notification_success",
-                                    "list_notifications", "list_notifications_by_user",
-                                    "create_notification_missing_fields", "get_analytics",
-                                    "get_analytics_with_date_range", "CREATE_USER", "USERS_LIST",
-                                    "USER_DETAIL", "NOT_FOUND", "CREATE_TASK", "TASKS_LIST",
-                                    "CREATE_NOTIFICATION", "NOTIFICATIONS_LIST", "ANALYTICS_DATA"]
+                  for test in all_tests:
+                      name = test.get("name", "")
+                      tags = test.get("tags", [])
 
-                is_example_based = any(kw in name for kw in example_keywords)
+                      # Specmatic Enterprise tags resiliency tests with "resiliency"
+                      is_resiliency = (
+                          any("resiliency" in str(t).lower() for t in tags) or
+                          "RESILIENCY" in name.upper()
+                      )
 
-                if is_resiliency or (not is_example_based and "400" in name):
-                  resiliency_tests.append(test)
-                else:
-                  contract_tests.append(test)
+                      if is_resiliency:
+                          resiliency_tests.append(test)
+                      else:
+                          contract_tests.append(test)
 
-              # Write separate CTRF reports
-              contract_report = {**report, "tests": contract_tests, "summary": {"tests": len(contract_tests), "passed": sum(1 for t in contract_tests if t.get("status") == "passed"), "failed": sum(1 for t in contract_tests if t.get("status") == "failed"), "skipped": sum(1 for t in contract_tests if t.get("status") == "skipped")}}
-              resiliency_report = {**report, "tests": resiliency_tests, "summary": {"tests": len(resiliency_tests), "passed": sum(1 for t in resiliency_tests if t.get("status") == "passed"), "failed": sum(1 for t in resiliency_tests if t.get("status") == "failed"), "skipped": sum(1 for t in resiliency_tests if t.get("status") == "skipped")}}
+                  def make_report(tests, original):
+                      return {
+                          **{k: v for k, v in original.items() if k not in ("tests", "summary")},
+                          "tests": tests,
+                          "summary": {
+                              "tests": len(tests),
+                              "passed": sum(1 for t in tests if t.get("status") == "passed"),
+                              "failed": sum(1 for t in tests if t.get("status") == "failed"),
+                              "skipped": sum(1 for t in tests if t.get("status") == "skipped"),
+                              "pending": sum(1 for t in tests if t.get("status") == "pending"),
+                              "other": sum(1 for t in tests if t.get("status") not in ("passed", "failed", "skipped", "pending"))
+                          }
+                      }
 
-              os.makedirs(f"reports/{svc}/contract/ctrf", exist_ok=True)
-              os.makedirs(f"reports/{svc}/resiliency/ctrf", exist_ok=True)
+                  for test_type, tests in [("contract", contract_tests), ("resiliency", resiliency_tests)]:
+                      out_dir = f"specmatic-reports/{svc}/{test_type}/ctrf"
+                      os.makedirs(out_dir, exist_ok=True)
+                      out_path = f"{out_dir}/ctrf-report.json"
+                      with open(out_path, "w") as f:
+                          json.dump(make_report(tests, report), f, indent=2)
 
-              with open(f"reports/{svc}/contract/ctrf/ctrf-report.json", "w") as f:
-                json.dump(contract_report, f, indent=2)
-              with open(f"reports/{svc}/resiliency/ctrf/ctrf-report.json", "w") as f:
-                json.dump(resiliency_report, f, indent=2)
+                  # Copy HTML report to both sub-directories for easy browsing
+                  html_src = f"specmatic-reports/{svc}/test/html"
+                  if os.path.isdir(html_src):
+                      for dest_base in ["contract", "resiliency"]:
+                          html_dest = f"specmatic-reports/{svc}/{dest_base}/html"
+                          if os.path.exists(html_dest):
+                              shutil.rmtree(html_dest)
+                          shutil.copytree(html_src, html_dest)
 
-              print(f"{svc}: {len(contract_tests)} contract, {len(resiliency_tests)} resiliency tests")
-              break  # Only process first CTRF file per service run
+                  print(f"{svc}: {len(contract_tests)} contract, {len(resiliency_tests)} resiliency tests")
+
           PYEOF
 
-      - name: Upload all Specmatic reports
+      # ── Commit reports to the repository ────────────────────────────────────
+      - name: Commit test reports to repository
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add specmatic-reports/
+          # Only commit if there are actual changes
+          if git diff --cached --quiet; then
+            echo "No report changes to commit."
+          else
+            git commit -m "chore: update Specmatic contract and resiliency test reports [skip ci]"
+            git push
+          fi
+
+      # ── Also upload as artifact for easy download ───────────────────────────
+      - name: Upload Specmatic reports artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: specmatic-reports
-          path: |
-            reports/
-            build/reports/
-          if-no-files-found: ignore
+          path: specmatic-reports/
+          if-no-files-found: warn
 
   # ─────────────────────────────────────────────────────────────────────────────
   # Job 3: Build the research dashboard
@@ -295,11 +342,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download Specmatic reports
+      - name: Download Specmatic reports artifact
         uses: actions/download-artifact@v4
         with:
           name: specmatic-reports
-          path: ./reports
+          path: ./specmatic-reports
         continue-on-error: true
 
       - name: Generate GitHub Actions summary
@@ -323,10 +370,26 @@ jobs:
           echo "| Notification Service | \`notification-service.yaml\` | \`notification-service_examples/\` (4 files) |" >> $GITHUB_STEP_SUMMARY
           echo "| Analytics Service | \`analytics-service.yaml\` | \`analytics-service_examples/\` (2 files) |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Test Reports" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Reports are saved per service under \`specmatic-reports/\` with separate" >> $GITHUB_STEP_SUMMARY
+          echo "contract and resiliency CTRF + HTML reports:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "specmatic-reports/" >> $GITHUB_STEP_SUMMARY
+          echo "  user-service/       # Contract + resiliency reports" >> $GITHUB_STEP_SUMMARY
+          echo "    test/             # Combined reports (Enterprise default)" >> $GITHUB_STEP_SUMMARY
+          echo "    contract/         # Contract-only CTRF + HTML" >> $GITHUB_STEP_SUMMARY
+          echo "    resiliency/       # Resiliency-only CTRF + HTML" >> $GITHUB_STEP_SUMMARY
+          echo "  task-service/" >> $GITHUB_STEP_SUMMARY
+          echo "  notification-service/" >> $GITHUB_STEP_SUMMARY
+          echo "  analytics-service/" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Specmatic Configuration" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Specmatic Version**: Enterprise (Docker \`specmatic/enterprise\`)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Resiliency Tests**: Enabled via Enterprise license" >> $GITHUB_STEP_SUMMARY
-          echo "- **External Examples**: Validated before contract tests run (15 files across 4 services)" >> $GITHUB_STEP_SUMMARY
-          echo "- **License**: Enterprise license via GitHub Secret (\`SPECMATIC_LICENSE\`) → \`~/.specmatic/specmatic-license.txt\`" >> $GITHUB_STEP_SUMMARY
-          echo "- **Reports**: Separate CTRF reports per service for contract and resiliency tests" >> $GITHUB_STEP_SUMMARY
+          echo "- **Resiliency Tests**: Automatically enabled with Enterprise license" >> $GITHUB_STEP_SUMMARY
+          echo "- **External Examples**: Validated before contract tests (15 files across 4 services)" >> $GITHUB_STEP_SUMMARY
+          echo "- **License**: Via GitHub Secret \`SPECMATIC_LICENSE\` -> \`~/.specmatic/specmatic-license.txt\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Reports**: Separate CTRF + HTML reports per service for contract and resiliency tests" >> $GITHUB_STEP_SUMMARY
