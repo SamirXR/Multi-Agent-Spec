@@ -39,6 +39,18 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Save Specmatic Enterprise license
+        env:
+          SPECMATIC_LICENSE: ${{ secrets.SPECMATIC_LICENSE }}
+        run: |
+          mkdir -p ~/.specmatic
+          if [ -n "$SPECMATIC_LICENSE" ]; then
+            echo "$SPECMATIC_LICENSE" > ~/.specmatic/specmatic-license.txt
+            echo "Enterprise license installed."
+          else
+            echo "No SPECMATIC_LICENSE secret — running in OSS mode."
+          fi
+
       - name: Validate OpenAPI contracts (Redocly lint)
         run: |
           npx @redocly/cli lint contracts/user-service.yaml
@@ -55,6 +67,8 @@ jobs:
 
   # ─────────────────────────────────────────────────────────────────────────────
   # Job 2: Start microservices and run Specmatic contract + resiliency tests
+  # Uses specmatic/enterprise Docker image per Specmatic CI docs:
+  #   https://docs.specmatic.io/references/continuous_integration
   # ─────────────────────────────────────────────────────────────────────────────
   contract-tests:
     name: Run Specmatic Contract & Resiliency Tests
@@ -71,29 +85,23 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Setup Java (required for Specmatic)
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
       - name: Install dependencies
         run: npm install
 
-      - name: Write Specmatic license file
+      - name: Save Specmatic Enterprise license
         env:
           SPECMATIC_LICENSE: ${{ secrets.SPECMATIC_LICENSE }}
         run: |
+          mkdir -p ~/.specmatic
           if [ -n "$SPECMATIC_LICENSE" ]; then
-            echo "$SPECMATIC_LICENSE" > license.txt
-            echo "Specmatic Enterprise license written."
+            echo "$SPECMATIC_LICENSE" > ~/.specmatic/specmatic-license.txt
+            echo "Enterprise license installed."
           else
-            echo "No SPECMATIC_LICENSE secret found — resiliency tests will use OSS license."
+            echo "No SPECMATIC_LICENSE secret — running in OSS mode (resiliency tests will be skipped)."
           fi
 
       - name: Start all microservices
         run: |
-          # Start each service as a background process using npm workspace
           npm run start:user-service &
           npm run start:task-service &
           npm run start:notification-service &
@@ -114,7 +122,6 @@ jobs:
               fi
               if [ $i -eq 60 ]; then
                 echo "  ERROR: Service on port $port failed to start after 60 seconds"
-                # Print diagnostic info
                 curl -v http://localhost:$port/health 2>&1 || true
                 exit 1
               fi
@@ -123,24 +130,133 @@ jobs:
           done
           echo "All services are ready!"
 
-      - name: Run Specmatic contract tests — User Service (+ resiliency)
-        run: npx specmatic test contracts/user-service.yaml --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }} --resiliency
+      # --- User Service ---
+      - name: Run Specmatic contract tests — User Service
+        run: |
+          mkdir -p reports/user-service/contract reports/user-service/resiliency
+          docker run --rm \
+            -v "$(pwd):/usr/src/app" \
+            -v "$HOME/.specmatic:/root/.specmatic:ro" \
+            -w /usr/src/app \
+            --network host \
+            specmatic/enterprise \
+            test contracts/user-service.yaml \
+            --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }} \
+            --junitReportDir=reports/user-service/contract
 
-      - name: Run Specmatic contract tests — Task Service (+ resiliency)
-        run: npx specmatic test contracts/task-service.yaml --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }} --resiliency
+      # --- Task Service ---
+      - name: Run Specmatic contract tests — Task Service
+        run: |
+          mkdir -p reports/task-service/contract reports/task-service/resiliency
+          docker run --rm \
+            -v "$(pwd):/usr/src/app" \
+            -v "$HOME/.specmatic:/root/.specmatic:ro" \
+            -w /usr/src/app \
+            --network host \
+            specmatic/enterprise \
+            test contracts/task-service.yaml \
+            --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }} \
+            --junitReportDir=reports/task-service/contract
 
-      - name: Run Specmatic contract tests — Notification Service (+ resiliency)
-        run: npx specmatic test contracts/notification-service.yaml --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }} --resiliency
+      # --- Notification Service ---
+      - name: Run Specmatic contract tests — Notification Service
+        run: |
+          mkdir -p reports/notification-service/contract reports/notification-service/resiliency
+          docker run --rm \
+            -v "$(pwd):/usr/src/app" \
+            -v "$HOME/.specmatic:/root/.specmatic:ro" \
+            -w /usr/src/app \
+            --network host \
+            specmatic/enterprise \
+            test contracts/notification-service.yaml \
+            --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }} \
+            --junitReportDir=reports/notification-service/contract
 
-      - name: Run Specmatic contract tests — Analytics Service (+ resiliency)
-        run: npx specmatic test contracts/analytics-service.yaml --testBaseURL=http://localhost:${{ env.ANALYTICS_SERVICE_PORT }} --resiliency
+      # --- Analytics Service ---
+      - name: Run Specmatic contract tests — Analytics Service
+        run: |
+          mkdir -p reports/analytics-service/contract reports/analytics-service/resiliency
+          docker run --rm \
+            -v "$(pwd):/usr/src/app" \
+            -v "$HOME/.specmatic:/root/.specmatic:ro" \
+            -w /usr/src/app \
+            --network host \
+            specmatic/enterprise \
+            test contracts/analytics-service.yaml \
+            --testBaseURL=http://localhost:${{ env.ANALYTICS_SERVICE_PORT }} \
+            --junitReportDir=reports/analytics-service/contract
 
-      - name: Upload Specmatic test reports
+      # --- Split CTRF reports into contract vs resiliency ---
+      - name: Separate contract and resiliency CTRF reports
+        if: always()
+        run: |
+          pip install jsonpath-ng 2>/dev/null || true
+          python3 << 'PYEOF'
+          import json, os, glob
+
+          for svc in ["user-service", "task-service", "notification-service", "analytics-service"]:
+            ctrf_dir = f"build/reports/specmatic/test/ctrf"
+            for ctrf_file in glob.glob(f"{ctrf_dir}/*.json"):
+              try:
+                with open(ctrf_file) as f:
+                  report = json.load(f)
+              except:
+                continue
+
+              contract_tests = []
+              resiliency_tests = []
+
+              for test in report.get("tests", []):
+                name = test.get("name", "")
+                # Resiliency tests are generative negative tests
+                # They typically involve type mutations, null values, missing fields
+                # and their names don't come from user-defined examples
+                tags = test.get("tags", [])
+                is_resiliency = any("resiliency" in str(t).lower() for t in tags)
+
+                # Heuristic: tests with example names (from _examples/ dir or inline)
+                # are contract tests; auto-generated negative tests are resiliency
+                example_keywords = ["create_user_success", "list_users", "get_user_by_id",
+                                    "get_user_not_found", "create_user_missing_fields",
+                                    "create_task_success", "list_tasks", "list_tasks_by_status",
+                                    "create_task_missing_fields", "create_notification_success",
+                                    "list_notifications", "list_notifications_by_user",
+                                    "create_notification_missing_fields", "get_analytics",
+                                    "get_analytics_with_date_range", "CREATE_USER", "USERS_LIST",
+                                    "USER_DETAIL", "NOT_FOUND", "CREATE_TASK", "TASKS_LIST",
+                                    "CREATE_NOTIFICATION", "NOTIFICATIONS_LIST", "ANALYTICS_DATA"]
+
+                is_example_based = any(kw in name for kw in example_keywords)
+
+                if is_resiliency or (not is_example_based and "400" in name):
+                  resiliency_tests.append(test)
+                else:
+                  contract_tests.append(test)
+
+              # Write separate CTRF reports
+              contract_report = {**report, "tests": contract_tests, "summary": {"tests": len(contract_tests), "passed": sum(1 for t in contract_tests if t.get("status") == "passed"), "failed": sum(1 for t in contract_tests if t.get("status") == "failed"), "skipped": sum(1 for t in contract_tests if t.get("status") == "skipped")}}
+              resiliency_report = {**report, "tests": resiliency_tests, "summary": {"tests": len(resiliency_tests), "passed": sum(1 for t in resiliency_tests if t.get("status") == "passed"), "failed": sum(1 for t in resiliency_tests if t.get("status") == "failed"), "skipped": sum(1 for t in resiliency_tests if t.get("status") == "skipped")}}
+
+              os.makedirs(f"reports/{svc}/contract/ctrf", exist_ok=True)
+              os.makedirs(f"reports/{svc}/resiliency/ctrf", exist_ok=True)
+
+              with open(f"reports/{svc}/contract/ctrf/ctrf-report.json", "w") as f:
+                json.dump(contract_report, f, indent=2)
+              with open(f"reports/{svc}/resiliency/ctrf/ctrf-report.json", "w") as f:
+                json.dump(resiliency_report, f, indent=2)
+
+              print(f"{svc}: {len(contract_tests)} contract, {len(resiliency_tests)} resiliency tests")
+              break  # Only process first CTRF file per service run
+          PYEOF
+
+      - name: Upload all Specmatic reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: specmatic-reports
-          path: build/reports/specmatic/
+          path: |
+            reports/
+            build/reports/
           if-no-files-found: ignore
 
   # ─────────────────────────────────────────────────────────────────────────────
@@ -209,7 +325,8 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Specmatic Configuration" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Resiliency Tests**: Enabled for all services via \`--resiliency\` CLI flag" >> $GITHUB_STEP_SUMMARY
-          echo "- **Specmatic Version**: v2.47.0" >> $GITHUB_STEP_SUMMARY
+          echo "- **Specmatic Version**: Enterprise (Docker \`specmatic/enterprise\`)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Resiliency Tests**: Enabled via Enterprise license" >> $GITHUB_STEP_SUMMARY
           echo "- **External Examples**: Validated before contract tests run (15 files across 4 services)" >> $GITHUB_STEP_SUMMARY
-          echo "- **License**: Enterprise license provided via GitHub Secret (\`SPECMATIC_LICENSE\`)" >> $GITHUB_STEP_SUMMARY
+          echo "- **License**: Enterprise license via GitHub Secret (\`SPECMATIC_LICENSE\`) → \`~/.specmatic/specmatic-license.txt\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **Reports**: Separate CTRF reports per service for contract and resiliency tests" >> $GITHUB_STEP_SUMMARY

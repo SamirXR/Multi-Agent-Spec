@@ -314,15 +314,15 @@ The project includes a GitHub Actions workflow (`.github/workflows/contract-vali
 
 ### Setting Up the Specmatic License for CI
 
-The Specmatic Enterprise license is gitignored and not committed to the repository. To enable resiliency tests in CI:
+The Specmatic Enterprise license is gitignored and not committed to the repository. The CI pipeline uses the [`specmatic/enterprise`](https://hub.docker.com/r/specmatic/enterprise) Docker image per [Specmatic's CI documentation](https://docs.specmatic.io/references/continuous_integration). To enable resiliency tests in CI:
 
 1. Go to your GitHub repo → **Settings → Secrets and variables → Actions**
 2. Add a **Repository Secret** named `SPECMATIC_LICENSE`
-3. Paste the full contents of your `license.txt` file as the value
+3. Paste the full contents of your Specmatic Enterprise license as the value
 
-The CI workflow writes this secret to `license.txt` before running contract tests.
+The CI workflow writes this secret to `~/.specmatic/specmatic-license.txt` before running contract tests with the Docker image. Resiliency tests are enabled automatically by the Enterprise license — no CLI flag is needed.
 
-> Without the license secret, CI will still run positive contract tests but will skip resiliency tests.
+> Without the license secret, the Enterprise Docker image falls back to OSS mode. Positive contract tests still run, but resiliency (generative negative) tests will be skipped.
 
 ---
 
