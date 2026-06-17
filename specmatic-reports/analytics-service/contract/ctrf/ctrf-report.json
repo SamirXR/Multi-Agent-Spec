@@ -1,212 +1,130 @@
 {
-  "results": {
-    "tool": {
-      "name": "Specmatic v2.47.0"
-    },
-    "summary": {
-      "tests": 3,
-      "passed": 3,
-      "failed": 0,
-      "skipped": 0,
-      "pending": 0,
-      "other": 0,
-      "start": 1781706008953,
-      "stop": 1781706009498,
-      "suites": 1,
-      "extra": {
-        "executionDetails": [
-          {
-            "protocol": "http",
-            "specType": "openapi",
-            "specification": "contracts/analytics-service.yaml",
-            "branch": "main",
-            "operations": [
-              {
-                "path": "/analytics",
-                "method": "GET",
-                "responseCode": 200,
-                "coverageStatus": "covered",
-                "eligibleForCoverage": true,
-                "omittedStatus": "NONE",
-                "testIds": [
-                  "2d65f94d-93ee-42ba-b7f0-24d3ccc0bc9d",
-                  "1478f958-7f19-4d44-ac85-cdb760ac1d42",
-                  "2d2fa8e2-fe19-460b-a918-5c774723010c"
-                ],
-                "responseContentType": "application/json",
-                "metrics": {
-                  "attempts": 3,
-                  "matches": 3
-                },
-                "reasons": [],
-                "qualifiers": [],
-                "status": "covered"
-              },
-              {
-                "path": "/analytics",
-                "method": "GET",
-                "responseCode": 400,
-                "coverageStatus": "not tested",
-                "eligibleForCoverage": true,
-                "omittedStatus": "SKIPPED",
-                "testIds": [],
-                "responseContentType": "application/json",
-                "metrics": {
-                  "attempts": 0,
-                  "matches": 0
-                },
-                "reasons": [
-                  {
-                    "id": "T00004",
-                    "title": "Generative Disabled",
-                    "documentationUrl": "https://docs.specmatic.io/rules#t00004",
-                    "summary": "This operation was skipped because it requires schema resiliency to be enabled"
-                  },
-                  {
-                    "id": "T00002",
-                    "title": "Examples Required",
-                    "documentationUrl": "https://docs.specmatic.io/rules#t00002",
-                    "summary": "This operation requires examples to run, but none were provided"
-                  }
-                ],
-                "qualifiers": [],
-                "status": "not tested"
-              }
-            ]
-          }
-        ]
-      }
-    },
-    "tests": [
-      {
-        "id": "2d65f94d-93ee-42ba-b7f0-24d3ccc0bc9d",
-        "name": "Scenario: GET /analytics -> 200 with the request from the example 'ANALYTICS_DATA'",
-        "status": "passed",
-        "duration": 154,
-        "suite": "contracts/analytics-service.yaml",
-        "message": "",
-        "rawStatus": "Success",
-        "tags": [
-          "method:get",
-          "status:200"
-        ],
-        "type": "ContractTest",
-        "extra": {
-          "valid": true,
-          "wip": false,
-          "input": "GET /analytics\nSpecmatic-Response-Code: 200\n\n",
-          "inputTime": 1781706009115,
-          "outputs": [
-            {
-              "title": "Response",
-              "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-O3JZ3tfjy10/7iM/V0j9qcKgx4E\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.212Z\"\n}",
-              "time": 1781706009270
-            }
-          ],
-          "reasons": [
-            {
-              "id": "T10001",
-              "title": "Executed Using Example",
-              "documentationUrl": "https://docs.specmatic.io/rules#t10001",
-              "summary": "This operation was executed by using an available example"
-            }
-          ],
-          "qualifiers": []
-        }
-      },
-      {
-        "id": "1478f958-7f19-4d44-ac85-cdb760ac1d42",
-        "name": "Scenario: GET /analytics -> 200 with the request from the example 'get_analytics'",
-        "status": "passed",
-        "duration": 91,
-        "suite": "contracts/analytics-service.yaml",
-        "message": "",
-        "rawStatus": "Success",
-        "tags": [
-          "method:get",
-          "status:200"
-        ],
-        "type": "ContractTest",
-        "extra": {
-          "valid": true,
-          "wip": false,
-          "input": "GET /analytics\nSpecmatic-Response-Code: 200\n\n",
-          "inputTime": 1781706009298,
-          "outputs": [
-            {
-              "title": "Response",
-              "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-y6ECCvNl2Yoh4LOvghP+Z4wCSrc\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.329Z\"\n}",
-              "time": 1781706009390
-            }
-          ],
-          "reasons": [
-            {
-              "id": "T10001",
-              "title": "Executed Using Example",
-              "documentationUrl": "https://docs.specmatic.io/rules#t10001",
-              "summary": "This operation was executed by using an available example"
-            }
-          ],
-          "qualifiers": []
-        }
-      },
-      {
-        "id": "2d2fa8e2-fe19-460b-a918-5c774723010c",
-        "name": "Scenario: GET /analytics -> 200 with the request from the example 'get_analytics_with_date_range' where REQUEST.PARAMETERS.QUERY contains the params 'from', 'to'",
-        "status": "passed",
-        "duration": 40,
-        "suite": "contracts/analytics-service.yaml",
-        "message": "",
-        "rawStatus": "Success",
-        "tags": [
-          "method:get",
-          "status:200"
-        ],
-        "type": "ContractTest",
-        "extra": {
-          "valid": true,
-          "wip": false,
-          "input": "GET /analytics?from=2026-06-17T14:20:09Z&to=2026-06-17T14:20:09Z\nSpecmatic-Response-Code: 200\n\n",
-          "inputTime": 1781706009429,
-          "outputs": [
-            {
-              "title": "Response",
-              "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-5Siqbnoy6laEWCJkwm0/vHeICrM\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.449Z\"\n}",
-              "time": 1781706009469
-            }
-          ],
-          "reasons": [
-            {
-              "id": "T10001",
-              "title": "Executed Using Example",
-              "documentationUrl": "https://docs.specmatic.io/rules#t10001",
-              "summary": "This operation was executed by using an available example"
-            }
-          ],
-          "qualifiers": []
-        }
-      }
-    ],
-    "environment": {},
-    "extra": {
-      "apiCoverage": "50%",
-      "actuatorEnabled": false,
-      "absoluteCoverage": "50%",
-      "specmaticConfigPath": "./specmatic.yaml"
-    }
+  "tool": {
+    "name": "Specmatic v2.47.0"
   },
-  "reportFormat": "CTRF",
-  "specVersion": "1.0.0",
-  "reportId": "5210ce31-a627-4813-abc3-a85e2b28f4d9",
-  "timestamp": "2026-06-17T14:20:08.953+00:00",
-  "generatedBy": "Specmatic v2.47.0",
-  "tests": [],
   "summary": {
-    "tests": 0,
-    "passed": 0,
+    "tests": 3,
+    "passed": 3,
     "failed": 0,
     "skipped": 0,
     "pending": 0,
     "other": 0
+  },
+  "tests": [
+    {
+      "id": "2d65f94d-93ee-42ba-b7f0-24d3ccc0bc9d",
+      "name": "Scenario: GET /analytics -> 200 with the request from the example 'ANALYTICS_DATA'",
+      "status": "passed",
+      "duration": 154,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706009115,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-O3JZ3tfjy10/7iM/V0j9qcKgx4E\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.212Z\"\n}",
+            "time": 1781706009270
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "1478f958-7f19-4d44-ac85-cdb760ac1d42",
+      "name": "Scenario: GET /analytics -> 200 with the request from the example 'get_analytics'",
+      "status": "passed",
+      "duration": 91,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706009298,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-y6ECCvNl2Yoh4LOvghP+Z4wCSrc\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.329Z\"\n}",
+            "time": 1781706009390
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    },
+    {
+      "id": "2d2fa8e2-fe19-460b-a918-5c774723010c",
+      "name": "Scenario: GET /analytics -> 200 with the request from the example 'get_analytics_with_date_range' where REQUEST.PARAMETERS.QUERY contains the params 'from', 'to'",
+      "status": "passed",
+      "duration": 40,
+      "suite": "contracts/analytics-service.yaml",
+      "message": "",
+      "rawStatus": "Success",
+      "tags": [
+        "method:get",
+        "status:200"
+      ],
+      "type": "ContractTest",
+      "extra": {
+        "valid": true,
+        "wip": false,
+        "input": "GET /analytics?from=2026-06-17T14:20:09Z&to=2026-06-17T14:20:09Z\nSpecmatic-Response-Code: 200\n\n",
+        "inputTime": 1781706009429,
+        "outputs": [
+          {
+            "title": "Response",
+            "content": "200 OK\nX-Powered-By: Express\nAccess-Control-Allow-Origin: *\nContent-Type: application/json; charset=utf-8\nContent-Length: 269\nETag: W/\"10d-5Siqbnoy6laEWCJkwm0/vHeICrM\"\nDate: Wed, 17 Jun 2026 14:20:09 GMT\nConnection: keep-alive\nKeep-Alive: timeout=5\n\n{\n    \"totalUsers\": 2,\n    \"totalTasks\": 2,\n    \"completedTasks\": 0,\n    \"completionRate\": 0,\n    \"activeNotifications\": 2,\n    \"tasksByPriority\": {\n        \"low\": 0,\n        \"medium\": 0,\n        \"high\": 2,\n        \"critical\": 0\n    },\n    \"tasksByStatus\": {\n        \"pending\": 2,\n        \"in_progress\": 0,\n        \"completed\": 0,\n        \"cancelled\": 0\n    },\n    \"generatedAt\": \"2026-06-17T14:20:09.449Z\"\n}",
+            "time": 1781706009469
+          }
+        ],
+        "reasons": [
+          {
+            "id": "T10001",
+            "title": "Executed Using Example",
+            "documentationUrl": "https://docs.specmatic.io/rules#t10001",
+            "summary": "This operation was executed by using an available example"
+          }
+        ],
+        "qualifiers": []
+      }
+    }
+  ],
+  "environment": {},
+  "extra": {
+    "apiCoverage": "50%",
+    "actuatorEnabled": false,
+    "absoluteCoverage": "50%",
+    "specmaticConfigPath": "./specmatic.yaml"
   }
 }
