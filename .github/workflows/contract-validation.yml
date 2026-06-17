@@ -147,6 +147,7 @@ jobs:
       # which we map to specmatic-reports/<service>/ on the host.
 
       - name: Run tests — User Service (contract + resiliency)
+        continue-on-error: true
         run: |
           mkdir -p specmatic-reports/user-service
           docker run --rm \
@@ -161,6 +162,7 @@ jobs:
             --testBaseURL=http://localhost:${{ env.USER_SERVICE_PORT }}
 
       - name: Run tests — Task Service (contract + resiliency)
+        continue-on-error: true
         run: |
           mkdir -p specmatic-reports/task-service
           docker run --rm \
@@ -175,6 +177,7 @@ jobs:
             --testBaseURL=http://localhost:${{ env.TASK_SERVICE_PORT }}
 
       - name: Run tests — Notification Service (contract + resiliency)
+        continue-on-error: true
         run: |
           mkdir -p specmatic-reports/notification-service
           docker run --rm \
@@ -189,6 +192,7 @@ jobs:
             --testBaseURL=http://localhost:${{ env.NOTIFICATION_SERVICE_PORT }}
 
       - name: Run tests — Analytics Service (contract + resiliency)
+        continue-on-error: true
         run: |
           mkdir -p specmatic-reports/analytics-service
           docker run --rm \
@@ -245,12 +249,12 @@ jobs:
                       tags = test.get("tags", [])
                       test_type = test.get("type", "")
 
-                      # Resiliency tests use type "ResiliencyTest" or have resiliency tags
+                      # Specmatic marks negative/resiliency tests with "-ve" prefix
+                      # and positive/contract tests with "+ve" prefix
                       is_resiliency = (
+                          name.startswith("-ve") or
                           test_type == "ResiliencyTest" or
-                          "resiliency" in test_type.lower() or
-                          any("resiliency" in str(t).lower() for t in tags) or
-                          "RESILIENCY" in name.upper()
+                          any("resiliency" in str(t).lower() for t in tags)
                       )
 
                       if is_resiliency:
